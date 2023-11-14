@@ -1,0 +1,110 @@
+footer{
+    position: relative;
+    background: #101010;
+    @media screen and (min-width: 768px) {
+        padding-top: 4.69rem;
+        min-height: 22.8125rem;
+        height: auto;
+        nav::before{
+            top:-4.69rem;
+        }
+        .paragraph{
+            width: 33.75rem;
+        }
+        .socials{
+            bottom:8.5rem;
+        }
+    }
+    @media screen and (max-width:1024px) and (min-width:768px){        
+        .socials{
+            bottom:3rem;
+        }
+        .logo{
+            margin-right: 2rem;
+        }
+    }
+    @media screen and (max-width:767px) and (min-width:375px){
+        padding-top: 3.75rem;
+        padding-bottom: 2.88rem;
+        nav::before{
+            top:-3.75rem;
+        }
+        .paragraph{
+            width: 100%;
+        }
+        nav{
+            flex-direction: column;
+        }
+        .logo{
+            margin-bottom: 2rem;
+        }
+        .socials{
+            bottom:0rem;
+        }
+    }
+    .logo{
+        background-image: url('/assets/shared/desktop/logo.svg');
+        width: 8.9375rem;
+        height: 1.5625rem;
+        flex-shrink: 0;
+    }
+    nav{
+        display: flex;
+        justify-content: space-between;
+    }
+    ul{
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 2.125rem;
+        list-style-type: none;
+        font-size: 0.8125rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.5625rem; 
+        letter-spacing: 0.125rem;
+        text-transform: uppercase;
+        li{
+            cursor: pointer;
+            color: #FFF;
+            &:hover{
+                color: #D87D4A;
+            }
+            
+        }
+    }
+    .paragraph{
+        p:first-child{
+            margin: 2.25rem 0 3.5rem;
+        }
+        p{
+            color:rgba(255,255,255,0.5);
+        }
+    }
+   .socials{
+        display: flex;
+        justify-content: space-between  ;
+        position: absolute;
+        right:0;
+        width: 6.5rem;
+        height: 1.5625rem;
+        flex-shrink: 0;
+        >div{
+            &:hover{
+                cursor: pointer;
+            }
+            svg:hover{
+                path{
+                    fill: #D87D4A;
+                }
+            }
+        }
+   }
+   nav::before{
+    content: '';
+    position: absolute;
+    width: 6.3125rem;
+    height: 0.25rem;
+    flex-shrink: 0;
+    background: #D87D4A;
+   }
+}

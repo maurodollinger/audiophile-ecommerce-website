@@ -1,0 +1,109 @@
+header{    
+    background: #0E0E0E;
+    height: 6.0625rem;
+    position: fixed;
+    width: 100%;
+
+    @media screen and (min-width:1024px) {
+        .logo{
+            margin-right: calc((12.3rem / 69.375rem) * 100%);
+        }
+    }
+    @media screen and (min-width:375px) and (max-width:1023px){
+        .logo{
+            margin-right: calc((2.3rem / 69.375rem) * 100%);
+        }
+    }
+    @media screen and (min-width:768px) {
+        nav{
+            margin: 0 calc((10.31rem / 90rem) * 100%)  ;
+        }
+        .navDesktop{
+            display: inline-flex;
+        }
+        .btnMobile{
+            display: none;
+        }
+    }
+    @media screen and (max-width:767px){
+        .navDesktop{
+            display: none;
+        }
+    }
+    @media screen and (max-width:767px) and (min-width:375px){
+        nav{
+            margin: 0 2.375rem;
+        }
+        .logo{
+            margin-left: 3.62rem;
+        }
+    }
+    @media screen and (min-width:375px) {
+        .btnCart{
+            right:0;
+        }
+        .btnMobile{
+            left: 0;
+        }
+    }
+    @media screen and (max-width: 374px) {
+        nav{
+            padding: 0 1.5rem;
+            justify-content: center;
+        }
+        .btnCart{
+            right: 1.5rem;
+        }
+        .btnMobile{
+            left:1.5rem;
+        }
+    }
+    .logo{
+        background-image: url('/assets/shared/desktop/logo.svg');
+        width: 8.9375rem;
+        height: 1.5625rem;
+        flex-shrink: 0;
+    }
+    .btnMobile{
+        position: absolute;
+        background-image: url('/assets/shared/tablet/icon-hamburger.svg');
+        width: 1rem;
+        height: 0.9375rem;
+        flex-shrink: 0;
+    }
+    nav{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        border-bottom:1px solid rgba(255,255,255,0.2);
+        position: relative;
+        .navDesktop{
+            justify-content: center;
+            align-items: flex-start;
+            gap: 2.125rem;
+            list-style-type: none;
+            
+            font-size: 0.8125rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 1.5625rem; 
+            letter-spacing: 0.125rem;
+            text-transform: uppercase;
+            li{
+                cursor: pointer;
+                color: #FFF;
+                &:hover{
+                    color: #D87D4A;
+                }
+            }
+        }
+    }
+    .btnCart{
+        background-image: url('/assets/shared/desktop/icon-cart.svg');
+        width: 1.45831rem;
+        height: 1.25rem;
+        flex-shrink: 0;
+        position: absolute;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap');
+
+body{
+    font-family: Manrope;
+}
+
+h1,h2,h3,h4,h5,h6{
+    color: #000;
+    font-style: normal;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+h1{    
+    font-size: 3.5rem;
+    line-height: 3.625rem;
+    letter-spacing: 0.125rem;
+}
+
+h2{
+    font-size: 2.5rem;
+    line-height: 2.75rem;
+    letter-spacing: 0.08931rem;
+}
+
+h3{
+    font-size: 2rem;
+    line-height: 2.25rem;
+    letter-spacing: 0.07144rem;
+}
+
+h4{
+    font-size: 1.75rem;
+    line-height: normal;
+    letter-spacing: 0.125rem;
+}
+
+h5{
+    font-size: 1.5rem;
+    line-height: normal;
+    letter-spacing: 0.10713rem;
+}
+
+h6{
+    font-size: 1.125rem;
+    line-height: normal;
+    letter-spacing: 0.08038rem;
+}
+
+p{
+    color: #000;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5625rem; 
+}
+
+.overline,.subtitle{
+    color: #D87D4A;
+    font-family: Manrope;
+    font-style: normal;
+    text-transform: uppercase;
+}
+.overline{    
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.625rem;
+}
+
+.subtitle{
+    font-size: 0.8125rem;
+    font-weight: 700;
+    line-height: 1.5625rem;
+    letter-spacing: 0.05806rem;
+}
+
+
+
+.container{
+    position: relative;
+    height: 100%;    
+    @media screen and (min-width:768px) {
+        margin: 0 calc((10.31rem / 90rem) * 100%)  ;
+    }
+    @media screen and (max-width:767px) and (min-width:375px){
+        margin: 0 2.375rem;
+    }
+}
