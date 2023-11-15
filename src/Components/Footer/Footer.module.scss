@@ -1,7 +1,7 @@
 footer{
     position: relative;
     background: #101010;
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 769px) {
         padding-top: 4.69rem;
         min-height: 22.8125rem;
         height: auto;
@@ -15,7 +15,7 @@ footer{
             bottom:8.5rem;
         }
     }
-    @media screen and (max-width:1024px) and (min-width:768px){        
+    @media screen and (max-width:1024px) and (min-width:769px){        
         .socials{
             bottom:3rem;
         }
@@ -23,7 +23,7 @@ footer{
             margin-right: 2rem;
         }
     }
-    @media screen and (max-width:767px) and (min-width:375px){
+    @media screen and (max-width:768px) and (min-width:376px){
         padding-top: 3.75rem;
         padding-bottom: 2.88rem;
         nav::before{
@@ -42,6 +42,51 @@ footer{
             bottom:0rem;
         }
     }
+    @media screen and (min-width:376px) {
+        nav::before{
+            position: absolute;
+        }
+        ul{
+            gap: 2.125rem;
+        }
+        .socials{
+            position: absolute;
+            height: 1.5625rem;
+        }
+        .paragraph{
+            p:first-child{
+                margin: 2.25rem 0 3.5rem;
+            }
+        }
+    }
+    @media screen and (max-width:375px) {
+        nav{
+            flex-direction: column;
+        }
+        nav::before{
+            position: relative;
+            margin: 0 auto;
+        }
+        .logo{
+            margin: 3rem auto;
+        }
+        ul{
+            gap: 1rem;
+            flex-direction: column;
+            align-items: center;
+        }
+        .paragraph{
+            text-align: center;
+            p:first-child{
+                margin: 3rem 0;
+            }
+        }
+        .socials{
+            position: relative;
+            margin:0 auto;
+            padding: 3rem 0 2.38rem 0;
+        }
+    }
     .logo{
         background-image: url('/assets/shared/desktop/logo.svg');
         width: 8.9375rem;
@@ -55,7 +100,6 @@ footer{
     ul{
         display: inline-flex;
         flex-wrap: wrap;
-        gap: 2.125rem;
         list-style-type: none;
         font-size: 0.8125rem;
         font-style: normal;
@@ -64,18 +108,16 @@ footer{
         letter-spacing: 0.125rem;
         text-transform: uppercase;
         li{
-            cursor: pointer;
-            color: #FFF;
-            &:hover{
-                color: #D87D4A;
-            }
-            
+            a{
+                cursor: pointer;
+                color: #FFF;
+                &:hover{
+                    color: #D87D4A;
+                }
+            }                
         }
     }
     .paragraph{
-        p:first-child{
-            margin: 2.25rem 0 3.5rem;
-        }
         p{
             color:rgba(255,255,255,0.5);
         }
@@ -83,10 +125,8 @@ footer{
    .socials{
         display: flex;
         justify-content: space-between  ;
-        position: absolute;
         right:0;
         width: 6.5rem;
-        height: 1.5625rem;
         flex-shrink: 0;
         >div{
             &:hover{
@@ -101,7 +141,6 @@ footer{
    }
    nav::before{
     content: '';
-    position: absolute;
     width: 6.3125rem;
     height: 0.25rem;
     flex-shrink: 0;

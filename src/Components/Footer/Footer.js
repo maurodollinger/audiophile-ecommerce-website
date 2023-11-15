@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Footer.module.scss';
+import { Link } from 'react-router-dom';
 
 const Footer = () =>{
   return (
@@ -8,10 +9,10 @@ const Footer = () =>{
         <nav>
           <div className={styles.logo}></div>
           <ul>
-            <li>Home</li>
-            <li>Headphones</li>
-            <li>Speakers</li>
-            <li>Earphones</li>
+            <li><Link to=''>Home</Link></li>
+            <li><Link to=''>Headphones</Link></li>
+            <li><Link to=''>Speakers</Link></li>
+            <li><Link to=''>Earphones</Link></li>
           </ul>   
         </nav>
         <div className={styles.paragraph}>

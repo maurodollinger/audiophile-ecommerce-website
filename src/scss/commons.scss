@@ -45,7 +45,13 @@ h6{
     line-height: normal;
     letter-spacing: 0.08038rem;
 }
-
+@media screen and (max-width:375px) {
+    h1{
+        font-size: 2.25rem;
+        line-height: 2.5rem; 
+        letter-spacing: 0.08038rem;
+    }
+}
 p{
     color: #000;
     font-size: 0.9375rem;
@@ -55,7 +61,7 @@ p{
 }
 
 .overline,.subtitle{
-    color: #D87D4A;
+   // color: #D87D4A;
     font-family: Manrope;
     font-style: normal;
     text-transform: uppercase;
@@ -74,15 +80,20 @@ p{
     letter-spacing: 0.05806rem;
 }
 
-
+a{
+    text-decoration: none;
+}
 
 .container{
     position: relative;
     height: 100%;    
-    @media screen and (min-width:768px) {
+    @media screen and (min-width:769px) {
         margin: 0 calc((10.31rem / 90rem) * 100%)  ;
     }
-    @media screen and (max-width:767px) and (min-width:375px){
+    @media screen and (max-width:768px) and (min-width:376px){
         margin: 0 2.375rem;
+    }
+    @media screen and (max-width:375px) {
+        padding: 0 1.5rem;        
     }
 }
