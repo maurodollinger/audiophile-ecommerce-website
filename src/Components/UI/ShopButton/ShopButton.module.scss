@@ -1,0 +1,21 @@
+.shopButton{
+    border:0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.83263rem;    
+    span:first-child{
+        color: rgba(0,0,0,0.5);
+        font-size: 0.8125rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 0.0625rem;
+        text-transform: uppercase;
+        height: 1.125rem;
+    }
+    span:last-child{
+        width: 0.3125rem;
+        height: 1rem;
+    }
+}

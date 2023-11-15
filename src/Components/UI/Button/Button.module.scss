@@ -1,0 +1,31 @@
+.button{
+    width: 10rem;
+    height: 3rem;
+    flex-shrink: 0;
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.0625rem;
+    text-transform: uppercase;
+    border: 0;
+    cursor: pointer;
+
+    &.one{
+        color: #FFF;
+        background-color: #D87D4A;
+        &:hover{
+            background-color: #FBAF85;
+        }
+    }
+
+    &.two{
+        color: #000;
+        background-color:transparent;
+        border: 1px solid #000;
+        &:hover{
+            color: #FFF;
+            background-color: #000;
+        }
+    }
+}
