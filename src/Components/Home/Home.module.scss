@@ -105,3 +105,154 @@
         padding-top:3.5rem;
     }
 }
+
+.productsContainer{
+    width: 100%;
+    margin-top:10.5rem;
+   @media screen and (max-width:850px) {
+    margin-top:7.38rem;
+   }
+    .productOne{
+        width: 100%;
+        background: #D87D4A;
+        border-radius: 0.5rem;
+        display: flex;
+        overflow: hidden;
+        position: relative;
+        @media screen and (min-width: 1025px) {
+            > div{
+                width: 50%;
+            }
+
+            .productTitle{
+                width: 21.8125rem;
+                margin: 8.31rem 5.94rem 7.75rem 8.64rem;
+                z-index: 1;
+            }
+
+            .producOneImage{
+                img{
+                    max-width: 25.63963rem;
+                    width: 100%;
+                    bottom:-1rem;
+                    left:calc(6rem / 25rem) * 100%;
+                }           
+            }
+            .circleAnimation{
+                top: 79%;
+                left: -12%;
+                width: calc((59rem / 69.375rem) * 100%);
+                height: 0;
+                padding-bottom: calc((59rem / 69.375rem) * 100%);
+            }
+        }
+        @media screen and (max-width: 1024px) {
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+
+            .productTitle{
+                width: 21.8125rem;
+                margin-bottom: 4rem;
+                text-align: center;
+                z-index: 1;
+            }
+
+            .producOneImage{
+                width: 100%;
+                img{
+                    max-width: 12.32575rem;
+                    width: 100%;
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    bottom: 4rem;
+                }           
+            }
+            .circleAnimation{
+                top: 11.5rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc((59rem / 43.0625rem) * 100%);
+                height: 0;
+                padding-bottom: calc((59rem / 43.0625rem) * 100%);;
+                
+              
+            }
+        }
+
+        @media screen and (max-width: 375px) {
+            .productTitle{
+                width: 17.5rem;
+                margin-bottom: 3.44rem;
+                z-index: 1;
+            }
+            .producOneImage{
+                img{
+                    max-width: 10.7655rem;
+                }           
+            }
+        }
+       
+        .producOneImage{
+            position: relative;
+            img{
+                position: absolute;
+            }           
+        }
+        h1{
+            color:white;
+        }
+        p{
+            color:rgba(255,255,255,0.75);
+            margin: 1.5rem 0 2.5rem;
+        }
+        .circleAnimation{
+            position:absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;        
+            span{
+                position: absolute;
+                border: 1px solid #FFF;
+                opacity: 0.25;
+            }
+            span:nth-child(1){
+                width: calc((29.5rem / 59rem) * 100%);
+                height: calc((29.5rem / 59rem) * 100%);
+                border-radius:  calc((29.5rem / 59rem) * 100%);;
+            }
+            span:nth-child(2){
+                width: calc((33.875rem / 59rem) * 100%);
+                height: calc((33.875rem / 59rem) * 100%);
+                border-radius: calc((33.875rem / 59rem) * 100%);
+            }
+            span:nth-child(3){
+                width: calc((59rem / 59rem) * 100%);
+                height:calc((59rem / 59rem) * 100%);
+                border-radius:calc((59rem / 59rem) * 100%);                
+            }
+        }
+    }
+    .productTwo{
+
+    }
+    .productThree{
+
+    }
+    @media screen and (min-width:1025px) {
+        .productOne{
+            height: 35rem;
+        }
+    }
+    @media screen and (max-width:1024px) {
+        .productOne{
+            height: 45rem;
+        }
+    }
+    @media screen and (max-width:375px) {
+        .productOne{
+            height: 37.5rem;
+        }
+    }
+}

@@ -13,6 +13,9 @@ const Button = (props) =>{
   case 'two':
     type = styles.two;
     break;
+  case 'three':
+    type = styles.three;
+    break;
   }
   return (
     <button className={`${styles.button} ${type}`}>
