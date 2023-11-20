@@ -1,0 +1,69 @@
+.promoSection{
+    @media screen and (min-width:1025px) {
+        height: 36.75rem;
+        margin-top:12.5rem;
+        margin-bottom:12.5rem;
+        >div{
+            > div{
+                width: 50%;
+            }
+            >div:first-child{
+                align-items: flex-start;                
+                padding-right: 7.8rem;
+            }
+            >div:last-child{
+                background-size: cover;
+            }
+        }
+    }
+    @media screen and (max-width:1024px) {
+        height: auto;
+        margin-top:6rem;
+        margin-bottom:6rem;
+        >div{
+            flex-direction: column-reverse;
+            > div{
+                width: 100%;
+            }
+            >div:first-child{
+                align-items: center;      
+                text-align: center;   
+                max-width: 35.8125rem;
+                width: 100%;
+                margin: 4rem auto 0;
+            }
+
+            >div:last-child{
+                height: 18.75rem;
+                background-size: inherit;
+            }
+        }
+    }
+    @media screen and (max-width:768px) {
+        >div{
+            >div:last-child{
+                
+                background-size: cover;
+            }
+        }
+    }
+    > div{
+        display: flex;
+        
+        >div:first-child{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            p{
+                opacity: 0.5;
+                margin-top:2rem;    
+            }
+        }
+        >div:last-child{
+            background-position: center;
+            background-image: url('/assets/shared/desktop/image-best-gear.jpg');
+            border-radius: 0.5rem;
+        }
+    }
+   
+}

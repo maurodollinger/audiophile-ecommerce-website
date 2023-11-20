@@ -96,7 +96,7 @@
     }
 }
 .products{
-    height: 246.875rem;
+   // height: 246.875rem;
     background: #FAFAFA;
     @media screen and (min-width:769px) {
         padding-top:7.5rem;
@@ -108,15 +108,19 @@
 
 .productsContainer{
     width: 100%;
-    margin-top:10.5rem;
+    margin-top:7.5rem;
    @media screen and (max-width:850px) {
-    margin-top:7.38rem;
+    margin-top:4.38rem;
    }
-    .productOne{
+
+   .productOne, .productTwo, .productThree{
+        margin-top: 3rem;
         width: 100%;
-        background: #D87D4A;
         border-radius: 0.5rem;
         display: flex;
+   }
+    .productOne{
+        background: #D87D4A;
         overflow: hidden;
         position: relative;
         @media screen and (min-width: 1025px) {
@@ -235,19 +239,86 @@
         }
     }
     .productTwo{
-
+        @media screen and (min-width:769px) {
+            padding-left: 7.88rem;
+        }
+        @media screen and (max-width:768px) {
+            padding-left: 3.89rem;
+        }
+        @media screen and (max-width:375px) {
+            padding-left: 2rem;
+        }
+        align-items: center;
+        justify-content: flex-start;
+        background-color: #F1F1F1;
+        background-position: center;
+        background-size: cover;
+        background-image: url('/assets/home/desktop/image-speaker-zx7.jpg');
+        h4{
+            margin-bottom: 2rem;
+        }
     }
     .productThree{
+        align-items: center;        
+        gap:1.88rem;
+        @media screen and (min-width:769px) {
+            > div{
+                width: 50%;
+            }
+            div:last-child{
+                padding-left:6rem;
+            }
+        }
+        @media screen and (max-width:768px) {
+            flex-direction: column;
+            > div{
+                width: 100%;
+            }
+            div:first-child{
+                height: 12.5rem;
+            }
+            div:last-child{
+                padding:1.5rem;
+                height: 12.5rem;
 
+            }
+        }
+        > div{
+            height: inherit;
+            background-color: #F1F1F1;
+            border-radius: 0.5rem;
+        }
+        div:first-child{
+            background-position: center;
+            background-size: cover;
+            background-image: url('/assets/home/desktop/image-earphones-yx1.jpg');
+        }
+        div:last-child{
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+        h4{
+            margin-bottom: 2rem;
+        }
+    }
+    .productTwo, .productThree{
+        height: 20rem;
     }
     @media screen and (min-width:1025px) {
         .productOne{
             height: 35rem;
         }
+       
     }
     @media screen and (max-width:1024px) {
         .productOne{
             height: 45rem;
+        }
+        .productThree{
+            height: 26.5rem;
+
         }
     }
     @media screen and (max-width:375px) {

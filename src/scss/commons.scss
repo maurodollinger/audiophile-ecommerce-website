@@ -45,11 +45,16 @@ h6{
     line-height: normal;
     letter-spacing: 0.08038rem;
 }
-@media screen and (max-width:375px) {
+@media screen and (max-width:768px) {
     h1{
         font-size: 2.25rem;
         line-height: 2.5rem; 
         letter-spacing: 0.08038rem;
+    }
+    h2{
+        font-size: 1.75rem;
+        line-height: normal;
+        letter-spacing: 0.0625rem;
     }
 }
 p{
@@ -103,4 +108,8 @@ a{
     .btnCatProduct_shop{    
         color:#D87D4A;
     }
+}
+
+.orange{
+    color:#D87D4A;
 }

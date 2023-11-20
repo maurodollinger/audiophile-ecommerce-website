@@ -4,6 +4,7 @@ import Button from '../UI/Button/Button';
 import CategoryList from '../UI/CategoryList/CategoryList';
 
 import speakerZX9 from '../../assets/home/desktop/image-speaker-zx9.png';
+import PromoSection from '../Shared/Promo/Promo';
 
 const Home = () =>{
   return(
@@ -41,11 +42,23 @@ const Home = () =>{
                 <Button type='three'>See product</Button>
               </div>
             </div>
-            <div className={styles.productTwo}></div>
-            <div className={styles.productThree}></div>
+            <div className={styles.productTwo}>
+              <div className={styles.productTitle}>
+                <h4>ZX7 SPEAKER</h4>
+                <Button type='two'>See product</Button>
+              </div>
+            </div>
+            <div className={styles.productThree}>
+              <div></div>
+              <div>
+                <h4>YX1 EARPHONES</h4>
+                <Button type='two'>See product</Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
+      <PromoSection/>
     </Fragment>
   );
 };
