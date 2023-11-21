@@ -1,0 +1,42 @@
+.category{
+    width: 100%;
+
+    > div:first-child{
+        height: 21rem;
+        width: inherit;
+        background-color: #000;
+        text-align: center;
+        h2{
+            padding-top: 12.19rem;
+            color: white;
+        }
+    }
+
+    .productsContainer{
+       
+        > div{
+            display: flex;
+            flex-direction: column-reverse;
+           
+        }
+        @media screen and (min-width:769px) {
+            margin-top: 10rem;
+            margin-bottom: 10rem;
+            >div{
+                gap:10rem
+            }
+            
+        }
+        @media screen and (max-width:768px) {
+            margin-top: 10rem;
+            margin-bottom: 7.5rem;
+            >div{
+                gap:7.5rem
+            }
+        }
+        @media screen and (max-width:375px) {
+            margin-top: 4rem;
+            margin-bottom: 7.5rem;
+        }
+    }
+}

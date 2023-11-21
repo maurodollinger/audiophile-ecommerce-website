@@ -1,7 +1,7 @@
 header{    
-    background: #101010;
+    background:transparent; //#101010;
     height: 6rem;
-    position: fixed;
+    position: absolute;
     width: 100%;
     z-index: 2;
     @media screen and (min-width:1024px) {

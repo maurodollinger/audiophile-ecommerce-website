@@ -19,7 +19,7 @@ const CategoryList = ({type}) =>{
     break;
   }
   return (
-    <section className={styles.categoryList}>
+    <section className={styles.categoryList}> 
       {list.map((l, i)=>(
         <CategoryProduct key={i} img={l.img}>{l.title}</CategoryProduct>
       ))}
