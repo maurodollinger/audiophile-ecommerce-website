@@ -1,0 +1,34 @@
+.counter{
+    width: 7.5rem;
+    background: #F1F1F1;
+    height: 3rem;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    float:left;
+    margin-right: 1rem;
+    span,button{
+        font-size: 0.8125rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 0.0625rem;
+        text-transform: uppercase;
+    }
+    span{
+        display: inline-block;
+    }
+    button{
+        width: 2.5rem;
+        height: 3rem;
+        cursor: pointer;
+        border: 0;
+        color: #000;
+        opacity: 0.25;
+        &:hover{
+            opacity: 1;
+            color:#D87D4A
+        }
+    }
+}

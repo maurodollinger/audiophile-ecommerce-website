@@ -20,7 +20,7 @@ const Category =() =>{
       <div className={styles.productsContainer}>
         <div className='container'>
           {filteredProducts.map((product,index) => (
-            <ProductCard key={product.id} product={product} index={index}/>
+            <ProductCard key={product.id} product={product} index={index} type='category'/>
           ))}
         </div>
       </div>
