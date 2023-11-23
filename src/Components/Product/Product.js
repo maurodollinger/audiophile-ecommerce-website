@@ -35,6 +35,42 @@ const IncludesList = ({ includes }) => {
   );
 };
 
+const Gallery = ({images}) =>{
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const path = '../';
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const getImage = (image) => {
+    if (windowSize < 768) {
+      return path+image.mobile;
+    } else if (windowSize < 1024) {
+      return path+image.tablet;
+    } else {
+      return path+image.desktop;
+    }
+  };
+
+  return (
+    <div className={styles.productGallery}>
+      <div className={styles.productGalleryLeft}>
+        <div style={{ backgroundImage: `url(${getImage(images.first)})` }}></div>
+        <div style={{ backgroundImage: `url(${getImage(images.second)})` }}></div>
+      </div>
+      <div className={styles.productGalleryRight} style={{ backgroundImage: `url(${getImage(images.third)})` }}>
+      </div>
+    </div>
+  );
+};
 
 
 const Product = () =>{
@@ -70,6 +106,8 @@ const Product = () =>{
                 <IncludesList includes={product.includes}/>
               </div>
             </div>
+            
+            <Gallery images={product.gallery}/>
           </div>
         )
         }
@@ -84,9 +122,13 @@ const Product = () =>{
 export default Product;
 
 ProductFeatures.propTypes = {
-  features:PropTypes.object.isRequired
+  features:PropTypes.string.isRequired
 };
 
 IncludesList.propTypes = {
-  includes:PropTypes.object.isRequired
+  includes:PropTypes.array.isRequired
+};
+
+Gallery.propTypes = {
+  images:PropTypes.object.isRequired
 };
