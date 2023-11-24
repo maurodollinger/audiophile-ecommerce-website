@@ -1,0 +1,61 @@
+.relatedProducts{
+    text-align: center;
+
+    h3{
+        margin-bottom: 4rem;
+    }
+
+    @media screen and (min-width:1025px) {
+        margin-top: 10rem;
+
+        flex-direction: row;
+        > div{
+            gap: 1.88rem;
+        }
+        .relProductCard{
+            div{
+                h5{
+                    margin: 2.5rem 0 2rem;
+                }
+            }
+        }
+    }
+    @media screen and (max-width:1024px) {
+        margin-top: 7.5rem;
+        > div{
+            gap:0.69rem;
+        }   
+    }
+    @media screen and (max-width:750px) {
+        > div{
+            flex-direction: column;
+            gap:3.5rem;
+        }   
+        .relProductCard{
+            div{
+                h5{
+                    margin:2rem;
+                }
+            }
+        }
+    }
+    > div{
+        display: flex;
+        //max-width: 69.375rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .relProductCard{
+       // max-width: 21.875rem;
+        width: 100%;
+        img{
+            width: 100%;
+            border-radius: 0.5rem;
+            background: #F1F1F1;
+        }
+        div{
+            text-align: center;
+        }
+    }
+}

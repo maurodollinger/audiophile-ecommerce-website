@@ -4,6 +4,7 @@ import products from '../../mockup/products.json';
 import { useNavigate } from 'react-router-dom';
 import ProductCard from '../Shared/ProductCard/ProductCard';
 import PropTypes from 'prop-types';
+import RelatedProducts from '../Shared/RelatedProducts/RelatedProducts';
 
 const getPath = () => {
   const currentUrl = window.location.href;
@@ -51,7 +52,7 @@ const Gallery = ({images}) =>{
   }, []);
 
   const getImage = (image) => {
-    if (windowSize < 768) {
+    if (windowSize < 750) {
       return path+image.mobile;
     } else if (windowSize < 1024) {
       return path+image.tablet;
@@ -78,13 +79,16 @@ const Product = () =>{
   const locationPath = getPath();
   const navigate = useNavigate();
 
+  let foundProduct = products.find(product => product.slug === locationPath);
+
   useEffect(() => {
-    const foundProduct = products.find(product => product.slug === locationPath);
+    foundProduct = products.find(product => product.slug === locationPath);
     setProduct(foundProduct);
-  }, []);
+    window.scrollTo(0, 0);
+  }, [locationPath]);
 
   const handleClick = () =>{
-    navigate('../../category/');
+    navigate('../category/'+foundProduct.category);
   };
 
   return(
@@ -108,6 +112,7 @@ const Product = () =>{
             </div>
             
             <Gallery images={product.gallery}/>
+            <RelatedProducts products={product.others}/>
           </div>
         )
         }
