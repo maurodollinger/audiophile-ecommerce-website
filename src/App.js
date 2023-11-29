@@ -6,6 +6,9 @@ import Footer from './Components/Footer/Footer';
 import Category from './Components/Category/Category';
 import Product from './Components/Product/Product';
 import './scss/commons.scss';
+import { UserProgressContextProvider } from './store/UserProgress';
+import Cart from './Components/Cart/Cart';
+import { CartContextProvider } from './store/CartContext';
 
 function App() {
   return (
@@ -24,9 +27,14 @@ function App() {
 function Layout() {
   return (
     <section>
-      <Header></Header>
-      <Outlet></Outlet>
-      <Footer></Footer>
+      <UserProgressContextProvider>
+        <CartContextProvider>
+          <Header></Header>
+          <Outlet></Outlet>
+          <Footer></Footer>
+          <Cart></Cart>
+        </CartContextProvider>
+      </UserProgressContextProvider>      
     </section>
   );
 }

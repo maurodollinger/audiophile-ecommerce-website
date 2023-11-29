@@ -6,6 +6,7 @@ import headphonesImage from '../../../assets/shared/desktop/image-category-thumb
 import speakersImage from '../../../assets/shared/desktop/image-category-thumbnail-speakers.png';
 import earphonesImage from '../../../assets/shared/desktop/image-category-thumbnail-earphones.png';
 import ShopButton from '../ShopButton/ShopButton';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const CategoryList = ({type}) =>{
   let list;
@@ -21,7 +22,7 @@ const CategoryList = ({type}) =>{
   return (
     <section className={styles.categoryList}> 
       {list.map((l, i)=>(
-        <CategoryProduct key={i} img={l.img}>{l.title}</CategoryProduct>
+        <CategoryProduct key={i} img={l.img} path={l.title}>{l.title}</CategoryProduct>
       ))}
       
     </section>
@@ -29,12 +30,29 @@ const CategoryList = ({type}) =>{
 };
 
 export const CategoryProduct = (props) =>{
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  function cleanString(inputString) {
+    var regex = /\/category.*$/;
+    if (inputString.includes('/category')) {
+      var newString = inputString.replace(regex, '/category/');
+      return newString;
+    } else{
+      return 'category/';
+    }
+  }
+
+  const handleClick = (path) =>{
+    const url = cleanString(location.pathname);
+    navigate(url+path);
+  };
   return (
     <div className={`${styles.categoryProduct} btnCatProduct`}>
-      <div>
+      <div >
         <img src={props.img}></img>
         <span>{props.children}</span>
-        <span><ShopButton/></span>
+        <span><ShopButton onClick={()=>handleClick(props.path)}/></span>
       </div>
      
     </div>
@@ -47,7 +65,8 @@ CategoryList.propTypes ={
 
 CategoryProduct.propTypes ={
   children:PropTypes.node.isRequired,
-  img:PropTypes.string.isRequired
+  img:PropTypes.string.isRequired,
+  path:PropTypes.string.isRequired
 };
 
 export default CategoryList;

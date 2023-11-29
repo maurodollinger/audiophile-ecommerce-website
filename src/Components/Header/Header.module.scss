@@ -107,5 +107,12 @@ header{
         flex-shrink: 0;
         position: absolute;
         cursor: pointer;
+        color:white;
+        font-size: 0.7rem;
+        small{
+            position: absolute;
+            right: 1.5rem;
+            top:0.3rem;
+        }
     }
 }

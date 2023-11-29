@@ -1,32 +1,38 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './ProductCard.module.scss';
 import Button from '../../UI/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import Counter from '../../UI/Counter/Counter';
+import CartContext from '../../../store/CartContext';
+import { currencyFormatter } from '../../../utils/formatting';
 
 const ProductCard = ({product, index, type}) => {
   const { mobile, tablet, desktop } = product.image;
   const navigate = useNavigate();
   const path = '../';
+  const cartCtx = useContext(CartContext);
 
-  // eslint-disable-next-line no-unused-vars
-  const [totalItems, setTotalItems] = useState(0);
+  const [totalItems, setTotalItems] = useState(1);
 
   const handleCountChange = (newCount) => {
     setTotalItems(newCount);
   };
 
-  const formattedPrice = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0, 
-    maximumFractionDigits: 2, 
-  }).format(product.price);
-
-
   const handleClick = () =>{
     navigate('../../product/'+product.slug, { relative: 'path' });
+  };
+
+  const handleAddToCart = ()=>{
+    const item = {
+      id:product.id,
+      name:product.name,
+      image:product.image,
+      slug:product.slug,
+      price:product.price,
+      quantity:totalItems
+    };
+    cartCtx.addItem(item);
   };
 
   return (
@@ -53,11 +59,11 @@ const ProductCard = ({product, index, type}) => {
           {(type === 'product') && (
             <Fragment>
               <div className='price'>
-                {formattedPrice}
+                {currencyFormatter.format(product.price)}
               </div>
               <div className={styles.shopActions}>
                 <Counter onCountChange={handleCountChange}/>
-                <Button type='one' >Add to cart</Button>
+                <Button type='one' onClick={handleAddToCart}>Add to cart</Button>
               </div>
             </Fragment>
           )}
