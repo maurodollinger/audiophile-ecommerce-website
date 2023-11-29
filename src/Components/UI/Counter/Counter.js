@@ -12,9 +12,13 @@ const Counter = ({ onCountChange, initialCount = 1,  small = false }) => {
   };
 
   const decrement = () => {
+    if(small && count === 1){
+      onCountChange(0);
+      return;
+    }
     const newCount = Math.max(count - 1, 1);
     setCount(newCount);
-    onCountChange(newCount);
+    onCountChange(newCount);    
   };
 
   useEffect(()=>{

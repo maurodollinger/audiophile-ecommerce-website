@@ -13,18 +13,35 @@ const Cart = () =>{
     userProgressCtx.hideCart();
   };
 
+  const handleRemoveAll = ()=>{
+    cartCtx.removeAll();
+  };
+
+  const handleCountChange = (count,item)=>{    
+    if(count===0) {
+      cartCtx.removeItem(item.id);
+    }else{
+      if(count>item.quantity) cartCtx.addItem({...item,quantity:1});
+      else cartCtx.removeItem(item.id);
+    }
+  };
+
+  const handleOnEmptyList = ()=>{
+    userProgressCtx.hideCart();
+  };
+
   return(
     <Modal className={styles.cartModal} open={userProgressCtx.progress==='cart'} handleClose={handleClose}>
       <div>
         {
           <div>
             <h6>Cart({cartCtx.totalItems})</h6>
-            <p>Remove all</p>
+            <p onClick={handleRemoveAll}>Remove all</p>
           </div>
         }
         {
           <>
-            <OrderList items={cartCtx.items} isModal/>
+            <OrderList items={cartCtx.items} isModal onCountChange={handleCountChange} onEmptyList={handleOnEmptyList}/>
           </>
         }
       </div>
