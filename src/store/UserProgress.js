@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createContext } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 const UserProgressContext = createContext({
   progress:'',
@@ -11,7 +12,8 @@ const UserProgressContext = createContext({
 });
 
 export function UserProgressContextProvider({children}){
-  const [userProgress, setUserProgress] = useState();
+  const [userProgress, setUserProgress] = useState('');
+  const navigate = useNavigate();
     
   function showCart(){
     setUserProgress('cart');
@@ -23,6 +25,7 @@ export function UserProgressContextProvider({children}){
 
   function showCheckout(){
     setUserProgress('checkout');
+    navigate('checkout');
   }
 
   function hideCheckout(){

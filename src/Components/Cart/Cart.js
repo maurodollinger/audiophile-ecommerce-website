@@ -30,6 +30,10 @@ const Cart = () =>{
     userProgressCtx.hideCart();
   };
 
+  const handleGoToCheckout = () =>{
+    userProgressCtx.showCheckout();
+  };
+
   return(
     <Modal className={styles.cartModal} open={userProgressCtx.progress==='cart'} handleClose={handleClose}>
       <div>
@@ -41,7 +45,7 @@ const Cart = () =>{
         }
         {
           <>
-            <OrderList items={cartCtx.items} isModal onCountChange={handleCountChange} onEmptyList={handleOnEmptyList}/>
+            <OrderList items={cartCtx.items} isModal onCountChange={handleCountChange} onEmptyList={handleOnEmptyList} goToCheckout={handleGoToCheckout}/>
           </>
         }
       </div>

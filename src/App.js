@@ -9,15 +9,17 @@ import './scss/commons.scss';
 import { UserProgressContextProvider } from './store/UserProgress';
 import Cart from './Components/Cart/Cart';
 import { CartContextProvider } from './store/CartContext';
+import Checkout from './Components/Checkout/Checkout';
 
 function App() {
   return (
     <Fragment>
       <Routes>
         <Route path='audiophile-ecommerce-website/build' element={<Layout />}>
-          <Route index element={<Home />}></Route>
+          <Route index path='' element={<Home />}></Route>
           <Route path="category/:categoryName" element={<Category />} />
           <Route path="product/:productName" element={<Product/>}/>
+          <Route path="checkout" element={<Checkout/>}/>
         </Route>
       </Routes>
     </Fragment>

@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import Card from '../Card/Card';
 
 const Modal = ({children, className, open, handleClose}) => {
   return ReactDOM.createPortal(
     <>
       <div className={`backdrop ${open ? 'open' : ''}`} onClick={handleClose}></div>
-      <div className={`modal ${className} ${open ? 'open' : ''}`}>
+      <Card className={`modal ${className} ${open ? 'open' : ''}`}>
         {children}
-      </div>
+      </Card>
     </>,
     document.getElementById('modal')
   );

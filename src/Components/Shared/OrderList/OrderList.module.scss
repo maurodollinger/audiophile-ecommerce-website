@@ -31,6 +31,11 @@
         margin-bottom: 1.5rem;
         >div:last-child{
             margin-left: auto;
+            width: 1.5rem;
+            p{
+                opacity: 0.5;
+                font-weight: 700;
+            }
         }
     }
     
@@ -61,10 +66,19 @@
 
 .payload{
     width: 100%;
-    position: absolute;
-    bottom:0rem;
+    &.fixed{
+        position: absolute;
+        bottom:0rem;
+    }
+    
     button{
         width: 100%;
+    }
+    >div.grandTotal{
+        margin-top: 1.5rem;
+        p:last-child{
+            color: #D87D4A;
+        }
     }
     >div{
         display: flex;
@@ -72,6 +86,7 @@
         margin-bottom: 1rem;
         p:first-child{
             opacity: 0.5;
+            text-transform: uppercase;
         }
         p:last-child{
             font-size: 1.125rem;
