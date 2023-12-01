@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { currencyFormatter } from '../../../utils/formatting';
 import Counter from '../../UI/Counter/Counter';
 import styles from './OrderList.module.scss';
@@ -20,53 +20,53 @@ function fixURL(path,string) {
 
   return 'build/'+string;
 }
-
-const OrderList = ({items, isModal = true, onCountChange, onEmptyList, goToCheckout}) =>{
-  const totalAmount = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+const OrderList = ({ items, isModal = true, onCountChange,  goToCheckout, disabledSubmit = true, onSubmit }) => {
+  const totalAmount = items.reduce((acc, { price, quantity }) => acc + price * quantity, 0);
   const location = useLocation();
-  const path =  location.pathname;
+  const path = location.pathname;
 
-  const payloadInfo = (!isModal) ? {
-    shipping:50,
-    vat:1079
-  } : null;
+  const payloadInfo = isModal
+    ? null
+    : {
+      shipping: 50,
+      vat: 1079,
+    };
 
-  const grandTotal = (!isModal) ? totalAmount+payloadInfo.shipping+payloadInfo.vat : null;
-  
-  const handleCounter = (n,item) =>{
-    onCountChange(n,item);
+  const grandTotal = isModal ? null : totalAmount + payloadInfo.shipping + payloadInfo.vat;
+
+  const handleCounter = (n, item) => {
+    onCountChange(n, item);
   };
 
-  useEffect(()=>{
-    if(totalAmount===0) onEmptyList();
-  },[totalAmount]);
+  const renderCounter = (item) => (
+    <div>
+      <Counter onCountChange={(n) => handleCounter(n, item)} initialCount={item.quantity} small></Counter>
+    </div>
+  );
 
-  return(
+  const renderQuantity = (item) => (
+    <div>
+      <p>{`x${item.quantity}`}</p>
+    </div>
+  );
+
+  return (
     <>
       <ul className={`${styles.orderList} ${isModal ? styles.fixed : ''}`}>
-        {
-          items.map((item)=>(
-            <li key={item.id}>
-              <div className={styles.image}><img src={fixURL(path,item.image.mobile)}></img></div>
-              <div className={styles.info}>
-                <p><b>{item.name}</b></p> 
-                <p>{currencyFormatter.format(item.price)}</p>
-              </div>
-              {isModal && 
-                <div>
-                  <Counter onCountChange={(n)=>handleCounter(n,item)} initialCount={item.quantity} small></Counter>
-                </div>
-              }
-              {!isModal &&
-                <div>
-                  <p>
-                    {'x'+item.quantity}
-                  </p>
-                </div>
-              }
-            </li>
-          ))
-        }
+        {items.map((item) => (
+          <li key={item.id}>
+            <div className={styles.image}>
+              <img src={fixURL(path, item.image.mobile)} alt={item.name} />
+            </div>
+            <div className={styles.info}>
+              <p>
+                <b>{item.name}</b>
+              </p>
+              <p>{currencyFormatter.format(item.price)}</p>
+            </div>
+            {isModal ? renderCounter(item) : renderQuantity(item)}
+          </li>
+        ))}
       </ul>
 
       <div className={`${styles.payload} ${isModal ? styles.fixed : ''}`}>
@@ -74,9 +74,7 @@ const OrderList = ({items, isModal = true, onCountChange, onEmptyList, goToCheck
           <p>TOTAL</p>
           <p>{currencyFormatter.format(totalAmount)}</p>
         </div>
-        {isModal && 
-          <Button type='one' onClick={goToCheckout}>checkout</Button>
-        }
+        {isModal && <Button type="one" onClick={goToCheckout}>checkout</Button>}
         {!isModal && (
           <>
             <div>
@@ -91,23 +89,24 @@ const OrderList = ({items, isModal = true, onCountChange, onEmptyList, goToCheck
               <p>grand total</p>
               <p>{currencyFormatter.format(grandTotal)}</p>
             </div>
-            <Button type='one'>continue & pay</Button>
+            <Button type="one" disabled={disabledSubmit} onClick={onSubmit}>
+              continue & pay
+            </Button>
           </>
-        )
-        }
-
-        
+        )}
       </div>
     </>
   );
 };
 
-OrderList.propTypes ={
-  items:PropTypes.array.isRequired,
-  isModal:PropTypes.bool,
-  onCountChange:PropTypes.func,
-  onEmptyList:PropTypes.func,
-  goToCheckout:PropTypes.func
+OrderList.propTypes = {
+  items: PropTypes.array.isRequired,
+  isModal: PropTypes.bool,
+  onCountChange: PropTypes.func,
+  onEmptyList: PropTypes.func,
+  goToCheckout: PropTypes.func,
+  disabledSubmit: PropTypes.bool,
+  onSubmit: PropTypes.func,
 };
 
 export default OrderList;

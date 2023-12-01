@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import headphonesImage from '../../../assets/shared/desktop/image-category-thumbnail-headphones.png';
 import speakersImage from '../../../assets/shared/desktop/image-category-thumbnail-speakers.png';
 import earphonesImage from '../../../assets/shared/desktop/image-category-thumbnail-earphones.png';
-import ShopButton from '../ShopButton/ShopButton';
+import ShopButton from '../../UI/ShopButton/ShopButton';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const CategoryList = ({type}) =>{
@@ -22,14 +22,14 @@ const CategoryList = ({type}) =>{
   return (
     <section className={styles.categoryList}> 
       {list.map((l, i)=>(
-        <CategoryProduct key={i} img={l.img} path={l.title}>{l.title}</CategoryProduct>
+        <CategoryProduct key={i} img={l.img} path={l.title} showShopButton={type === 'default'}>{l.title}</CategoryProduct>
       ))}
       
     </section>
   );
 };
 
-export const CategoryProduct = (props) =>{
+export const CategoryProduct = ({ img, children, path,showShopButton }) =>{
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -50,9 +50,9 @@ export const CategoryProduct = (props) =>{
   return (
     <div className={`${styles.categoryProduct} btnCatProduct`}>
       <div >
-        <img src={props.img}></img>
-        <span>{props.children}</span>
-        <span><ShopButton onClick={()=>handleClick(props.path)}/></span>
+        <img src={img} alt={`${children} category`}></img>
+        <span>{children}</span>
+        {showShopButton && <span><ShopButton onClick={() => handleClick(path)} /></span>}
       </div>
      
     </div>
@@ -66,7 +66,8 @@ CategoryList.propTypes ={
 CategoryProduct.propTypes ={
   children:PropTypes.node.isRequired,
   img:PropTypes.string.isRequired,
-  path:PropTypes.string.isRequired
+  path:PropTypes.string.isRequired,
+  showShopButton:PropTypes.bool
 };
 
 export default CategoryList;

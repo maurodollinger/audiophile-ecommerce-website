@@ -12,6 +12,8 @@ const ProductCard = ({product, index, type}) => {
   const navigate = useNavigate();
   const path = '../';
   const cartCtx = useContext(CartContext);
+  const CATEGORY_TYPE = 'category';
+  const PRODUCT_TYPE = 'product';
 
   const [totalItems, setTotalItems] = useState(1);
 
@@ -34,6 +36,7 @@ const ProductCard = ({product, index, type}) => {
     };
     cartCtx.addItem(item);
   };
+  
 
   return (
     <section className={`${styles.productCard} ${(index % 2===0) ? '' : styles.odd}`}>
@@ -53,10 +56,10 @@ const ProductCard = ({product, index, type}) => {
           <span className='overline orange'>new product</span>
           <h3>{product.name}</h3>
           <p>{product.description}</p>
-          {(type === 'category') && (
+          {(type === CATEGORY_TYPE) && (
             <Button type='one' onClick={handleClick}>See product</Button>
           )}
-          {(type === 'product') && (
+          {(type === PRODUCT_TYPE) && (
             <Fragment>
               <div className='price'>
                 {currencyFormatter.format(product.price)}

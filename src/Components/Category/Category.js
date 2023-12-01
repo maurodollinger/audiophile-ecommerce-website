@@ -3,15 +3,23 @@ import { useLocation, useParams } from 'react-router-dom';
 import styles from './Category.module.scss';
 import products from '../../mockup/products.json';
 import ProductCard from '../Shared/ProductCard/ProductCard';
-import CategoryList from '../UI/CategoryList/CategoryList';
+import CategoryList from '../Shared/CategoryList/CategoryList';
 import PromoSection from '../Shared/Promo/Promo';
 
 const Category =() =>{
   const { categoryName } = useParams();
+
+  // Check if categoryName is not valid
+  if (!categoryName) {
+    // Handle error, e.g., render an error message or redirect
+    return <p>Invalid category</p>;
+  }
+
   const filteredProducts = products.filter(product => product.category === categoryName);
 
   const location = useLocation();
   useEffect(()=>{
+    document.title = `Category ${categoryName} - AudioPhile E-commerce`;
     window.scrollTo(0, 0);
   },[location]);
 

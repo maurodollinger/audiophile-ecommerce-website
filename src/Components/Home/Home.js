@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import styles from './Home.module.scss';
 import Button from '../UI/Button/Button';
-import CategoryList from '../UI/CategoryList/CategoryList';
+import CategoryList from '../Shared/CategoryList/CategoryList';
 import speakerZX9 from '../../assets/home/desktop/image-speaker-zx9.png';
 import PromoSection from '../Shared/Promo/Promo';
 import { useNavigate } from 'react-router-dom';

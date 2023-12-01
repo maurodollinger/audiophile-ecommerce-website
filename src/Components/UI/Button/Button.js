@@ -18,7 +18,7 @@ const Button = (props) =>{
     break;
   }
   return (
-    <button className={`${styles.button} ${type}`} onClick={props.onClick}>
+    <button className={`${styles.button} ${type} ${props.disabled ? styles.disabled : ''}`} onClick={props.onClick} disabled={props.disabled}>
       {props.children}
     </button>
   );
@@ -27,7 +27,8 @@ const Button = (props) =>{
 Button.propTypes ={
   children: PropTypes.node.isRequired,
   type: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool
 };
 
 export default Button;

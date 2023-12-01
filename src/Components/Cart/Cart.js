@@ -6,46 +6,44 @@ import CartContext from '../../store/CartContext';
 import OrderList from '../Shared/OrderList/OrderList';
 
 const Cart = () =>{
-  const userProgressCtx = useContext(UserProgressContext);
-  const cartCtx = useContext(CartContext);
+  const { hideCart, showCheckout, progress } = useContext(UserProgressContext);
+  const { removeAll, removeItem, addItem, items, totalItems } = useContext(CartContext);
 
   const handleClose =()=>{
-    userProgressCtx.hideCart();
-  };
-
-  const handleRemoveAll = ()=>{
-    cartCtx.removeAll();
+    hideCart();
   };
 
   const handleCountChange = (count,item)=>{    
-    if(count===0) {
-      cartCtx.removeItem(item.id);
-    }else{
-      if(count>item.quantity) cartCtx.addItem({...item,quantity:1});
-      else cartCtx.removeItem(item.id);
+    if (count === 0) {
+      removeItem(item.id);
+    } else if (count > item.quantity) {
+      addItem({ ...item, quantity: 1 });
+    } else {
+      removeItem(item.id);
     }
   };
 
   const handleOnEmptyList = ()=>{
-    userProgressCtx.hideCart();
+    hideCart();
   };
 
-  const handleGoToCheckout = () =>{
-    userProgressCtx.showCheckout();
+  const handleCheckout = () =>{
+    showCheckout();
   };
 
   return(
-    <Modal className={styles.cartModal} open={userProgressCtx.progress==='cart'} handleClose={handleClose}>
+    
+    <Modal className={styles.cartModal} open={progress==='cart'} handleClose={handleClose}>
       <div>
         {
           <div>
-            <h6>Cart({cartCtx.totalItems})</h6>
-            <p onClick={handleRemoveAll}>Remove all</p>
+            <h6>Cart({totalItems})</h6>
+            <p onClick={() => removeAll()}>Remove all</p>
           </div>
         }
         {
           <>
-            <OrderList items={cartCtx.items} isModal onCountChange={handleCountChange} onEmptyList={handleOnEmptyList} goToCheckout={handleGoToCheckout}/>
+            <OrderList items={items} isModal onCountChange={handleCountChange} onEmptyList={handleOnEmptyList} goToCheckout={handleCheckout}/>
           </>
         }
       </div>

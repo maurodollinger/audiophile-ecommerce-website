@@ -10,6 +10,7 @@ import { UserProgressContextProvider } from './store/UserProgress';
 import Cart from './Components/Cart/Cart';
 import { CartContextProvider } from './store/CartContext';
 import Checkout from './Components/Checkout/Checkout';
+import { FormProvider } from './store/FormContext';
 
 function App() {
   return (
@@ -31,10 +32,12 @@ function Layout() {
     <section>
       <UserProgressContextProvider>
         <CartContextProvider>
-          <Header></Header>
-          <Outlet></Outlet>
-          <Footer></Footer>
-          <Cart></Cart>
+          <FormProvider>
+            <Header></Header>
+            <Outlet></Outlet>
+            <Footer></Footer>
+            <Cart></Cart>
+          </FormProvider>
         </CartContextProvider>
       </UserProgressContextProvider>      
     </section>
