@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useForm } from '../../store/FormContext';
+import UserProgressContext from '../../store/UserProgress';
+import { useNavigate } from 'react-router-dom';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -18,9 +20,19 @@ const validationSchema = Yup.object().shape({
   zipcode: Yup.string().min(5, 'Zip code must have at least 5 digits').required('Zip code is required'),
   country: Yup.string().required('Country is required'),
   city: Yup.string().required('City is required'),
-  emoneynumber: Yup.string().required('E-money number is required'),
-  emoneypin:Yup.string().required('E-money pint is required')
+  paymentMethod: Yup.string(),
+  emoneynumber: Yup.string().when('paymentMethod', {
+    is: 'e-money',
+    then: (validationSchema) => validationSchema.required('E-money number is required'),
+    otherwise: (validationSchema) => validationSchema.notRequired()
+  }),
+  emoneypin: Yup.string().when('paymentMethod', {
+    is: 'e-money',
+    then: (validationSchema) => validationSchema.required('E-money pin is required'),
+    otherwise: (validationSchema) =>  validationSchema.notRequired()
+  })
 });
+  
 
 export const CustomInput = ({field,meta,placeholder}) =>{
   return(
@@ -41,6 +53,7 @@ CustomInput.propTypes ={
 
 export const CheckoutFormContainer = () =>{
   const { setFormValid,  onSubmitForm, setOffSubmitHandler} = useForm();
+  const {showCompleted} = useContext(UserProgressContext);
   
   return(
     <Card className={styles.checkoutFormContainer}>
@@ -54,17 +67,17 @@ export const CheckoutFormContainer = () =>{
           zipcode: '',
           country: '',
           city: '',
+          paymentMethod:'e-money',
           emoneynumber:'',
-          emoneypin:''
+          emoneypin:'',
         }}
         validationSchema={validationSchema}
         // eslint-disable-next-line no-unused-vars
-        onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
-          setSubmitting(false);
+        onSubmit={(values) => {
+          showCompleted();
         }}
       >
-        {({ isValid , submitForm}) => {
+        {({ isValid , submitForm, setFieldValue}) => {
           const enableFormSubmission = () => {
             if (onSubmitForm === true && isValid === true) {
               submitForm();
@@ -80,7 +93,7 @@ export const CheckoutFormContainer = () =>{
             enableFormSubmission();
           }, [onSubmitForm, isValid]);
           return(
-            <FormComponent/>
+            <FormComponent setFieldValue={setFieldValue}/>
           );
         }}
       </Formik>      
@@ -89,13 +102,15 @@ export const CheckoutFormContainer = () =>{
   );
 };
 
-export const FormComponent = () =>{
+// eslint-disable-next-line react/prop-types
+export const FormComponent = ({setFieldValue}) =>{
   const [formData, setFormData] = useState({
     selectedOption: 'e-money',
   });
 
   const handleOptionChange = (event) => {
     setFormData({ ...formData, selectedOption: event.target.id });
+    setFieldValue('paymentMethod', event.target.id);
   };
 
   return (
@@ -194,7 +209,8 @@ export const FormComponent = () =>{
                 <circle cx="10" cy="10" r="5" fill="#D87D4A"/>
               </svg>
             </div>
-            <input type='radio' id="e-money" name="opciones" checked={formData.selectedOption === 'e-money'} onChange={handleOptionChange}></input>
+            <input type='radio' id="e-money" name="opciones" checked={formData.selectedOption === 'e-money'} onChange={handleOptionChange} ></input>
+            <Field type="hidden" name="paymentMethod" value={formData.selectedOption.toString()} />
             <label htmlFor="e-money">e-Money</label>
           </div>
           <div className={`${styles.inputOptions} ${formData.selectedOption === 'cash-on-delivery' ? styles.selected : ''}`}>
@@ -238,7 +254,7 @@ export const FormComponent = () =>{
           </div>
           :
           <div className={styles.cashOnInfo}>
-            <div><img src={cashOnIcon}></img></div>
+            <div><img src={cashOnIcon} alt='cash on delivery icon'></img></div>
             <p>{'The ‘Cash on Delivery’ option enables you to pay in cash when our delivery courier arrives at your residence. Just make sure your address is correct so that your order will not be cancelled.'}</p>
           </div>
       }
@@ -251,14 +267,16 @@ export const FormComponent = () =>{
 const Checkout = () =>{
   const cartCtx = useContext(CartContext);
   const { isFormValid, setOnSubmitHandler } = useForm();
+  const navigate = useNavigate();
 
-  const handleSubmit = () =>{
+  const handleSubmit = (value) =>{
+    cartCtx.setGrandTotal(value);
     setOnSubmitHandler();
   };
   return(
     <section className={styles.checkout}>
       <div className='container'>
-        <span onClick={()=>{}}>Go Back</span>
+        <span onClick={()=>navigate(-1)}>Go Back</span>
         <div>
           <CheckoutFormContainer/>
           <Card className={styles.summary}>

@@ -11,6 +11,7 @@ import Cart from './Components/Cart/Cart';
 import { CartContextProvider } from './store/CartContext';
 import Checkout from './Components/Checkout/Checkout';
 import { FormProvider } from './store/FormContext';
+import OrderComplete from './Components/OrderComplete/OrderComplete';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function Layout() {
             <Outlet></Outlet>
             <Footer></Footer>
             <Cart></Cart>
+            <OrderComplete></OrderComplete>
           </FormProvider>
         </CartContextProvider>
       </UserProgressContextProvider>      

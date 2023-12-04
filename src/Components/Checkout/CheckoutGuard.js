@@ -5,7 +5,7 @@ import UserProgressContext from '../../store/UserProgress';
 export const CheckoutGuard = () => {
   const { progress } = useContext(UserProgressContext);
 
-  if (progress !== 'checkout') {
+  if (progress !== 'checkout' && progress !== 'completed') {
     return <Navigate to="../" />;
   }
 

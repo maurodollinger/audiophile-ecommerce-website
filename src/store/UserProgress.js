@@ -8,8 +8,10 @@ const UserProgressContext = createContext({
   showCart:()=>{},
   hideCart:()=>{},
   showCheckout:()=>{},
-  hideCheckout:()=>{},
-  readyToPay:()=>{}
+  readyToPay:()=>{},
+  showCompleted:()=>{},
+  finishUserProgress:()=>{},
+  cleanUserProgress:()=>{}
 });
 
 export function UserProgressContextProvider({children}){
@@ -29,12 +31,20 @@ export function UserProgressContextProvider({children}){
     navigate('checkout');
   }
 
-  function hideCheckout(){
-    setUserProgress('');
-  }
-
   function readyToPay(){
     setUserProgress('readytopay');
+  }
+
+  function showCompleted(){
+    setUserProgress('completed');
+  }
+
+  function finishUserProgress(){
+    setUserProgress('finished');
+  }
+
+  function cleanUserProgress(){
+    setUserProgress('');
   }
 
   const userProgressCtx = {
@@ -42,8 +52,10 @@ export function UserProgressContextProvider({children}){
     showCart,
     hideCart,
     showCheckout,
-    hideCheckout,
-    readyToPay
+    readyToPay,
+    showCompleted,
+    finishUserProgress,
+    cleanUserProgress
   };
 
   return(

@@ -89,7 +89,7 @@ const OrderList = ({ items, isModal = true, onCountChange,  goToCheckout, disabl
               <p>grand total</p>
               <p>{currencyFormatter.format(grandTotal)}</p>
             </div>
-            <Button type="one" disabled={disabledSubmit} onClick={onSubmit}>
+            <Button type="one" disabled={disabledSubmit} onClick={()=>onSubmit(grandTotal)}>
               continue & pay
             </Button>
           </>

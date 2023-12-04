@@ -1,17 +1,28 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useContext, useEffect} from 'react';
 import styles from './Home.module.scss';
 import Button from '../UI/Button/Button';
 import CategoryList from '../Shared/CategoryList/CategoryList';
 import speakerZX9 from '../../assets/home/desktop/image-speaker-zx9.png';
 import PromoSection from '../Shared/Promo/Promo';
 import { useNavigate } from 'react-router-dom';
+import UserProgressContext from '../../store/UserProgress';
+import CartContext from '../../store/CartContext';
 
 const Home = () =>{
+  const {progress,cleanUserProgress} = useContext(UserProgressContext);
+  const {cleanCart}= useContext(CartContext);
   const navigate = useNavigate();
   
   const handleClick = (path)=>{
     navigate('product/'+path);
   };
+
+  useEffect(()=>{
+    if(progress==='finished'){
+      cleanCart();
+      cleanUserProgress();
+    }
+  },[progress]);
 
   return(
     <Fragment>

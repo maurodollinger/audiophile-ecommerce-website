@@ -1,13 +1,15 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { createContext } from 'react';
 import PropTypes from 'prop-types';
 
 const CartContext = createContext({
   items:[],
   totalItems:0,
+  grandTotal:0,
   addItem:()=>{},
   removeItem:()=>{},
-  removeAll:()=>{}
+  removeAll:()=>{},
+  setGrandTotal:()=>{}
 });
 
 const calculateTotalItems = (items) => {
@@ -60,6 +62,7 @@ export function CartContextProvider({children}){
   const storedCart = JSON.parse(localStorage.getItem('cart')) || { items: [] };
 
   const [cartState,dispatchCartAction] = useReducer(cartReducer,storedCart);
+  const [totalCount,setTotalCount] = useState(0);
 
   function addItem(item){
     dispatchCartAction({type:'ADD_ITEM',item});
@@ -73,12 +76,26 @@ export function CartContextProvider({children}){
     dispatchCartAction({type:'REMOVE_ALL'});
   }
 
+  function setGrandTotal(value){
+    setTotalCount(value);
+  }
+
+  function cleanCart(){
+    dispatchCartAction({type:'REMOVE_ALL'});
+    setTotalCount(0);
+
+    localStorage.removeItem('cart');
+  }
+
   const cartContext ={
     items:cartState.items,
     totalItems:calculateTotalItems(cartState.items),
+    grandTotal:totalCount,
     addItem,
     removeItem,
-    removeAll
+    removeAll,
+    setGrandTotal,
+    cleanCart
   };
 
   useEffect(()=>{
