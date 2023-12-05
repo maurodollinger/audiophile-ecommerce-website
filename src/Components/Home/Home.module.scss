@@ -1,6 +1,16 @@
 .main{
     width: 100%;
 
+
+    @media screen and (max-width:768px) {
+    &::before{
+        content:'';
+        display: block;
+        background-color: #000;
+        height: 6.0625rem;
+        width: 100%;
+    }
+    }
     .hero{
         background: #101010;
         overflow: hidden;

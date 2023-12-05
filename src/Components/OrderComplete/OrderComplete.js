@@ -21,7 +21,6 @@ const OrderComplete = () =>{
       const firstItemImage = new Image();
       firstItemImage.src = items[0].image.mobile;
       image.current.src = firstItemImage.src;
-      console.log(image.current.src);
     }
   },[items,progress]);
   

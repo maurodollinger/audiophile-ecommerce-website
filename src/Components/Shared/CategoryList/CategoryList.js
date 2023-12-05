@@ -8,28 +8,24 @@ import earphonesImage from '../../../assets/shared/desktop/image-category-thumbn
 import ShopButton from '../../UI/ShopButton/ShopButton';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const CategoryList = ({type}) =>{
+const CategoryList = () =>{
   let list;
-  switch(type){
-  case 'default':
-    list = [
-      {title:'headphones',img:headphonesImage},
-      {title:'speakers',img:speakersImage},
-      {title:'earphones',img:earphonesImage}               
-    ];
-    break;
-  }
+  list = [
+    {title:'headphones',img:headphonesImage},
+    {title:'speakers',img:speakersImage},
+    {title:'earphones',img:earphonesImage}               
+  ];
   return (
     <section className={styles.categoryList}> 
       {list.map((l, i)=>(
-        <CategoryProduct key={i} img={l.img} path={l.title} showShopButton={type === 'default'}>{l.title}</CategoryProduct>
+        <CategoryProduct key={i} img={l.img} path={l.title}>{l.title}</CategoryProduct>
       ))}
       
     </section>
   );
 };
 
-export const CategoryProduct = ({ img, children, path,showShopButton }) =>{
+export const CategoryProduct = ({ img, children, path }) =>{
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -52,16 +48,13 @@ export const CategoryProduct = ({ img, children, path,showShopButton }) =>{
       <div >
         <img src={img} alt={`${children} category`}></img>
         <span>{children}</span>
-        {showShopButton && <span><ShopButton onClick={() => handleClick(path)} /></span>}
+        <span><ShopButton onClick={() => handleClick(path)} /></span>
       </div>
      
     </div>
   );
 };
 
-CategoryList.propTypes ={
-  type:PropTypes.string
-};
 
 CategoryProduct.propTypes ={
   children:PropTypes.node.isRequired,

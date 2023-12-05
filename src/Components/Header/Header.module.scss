@@ -115,4 +115,30 @@ header{
             top:0.3rem;
         }
     }
+    .mobileCategoryDrop{
+        @media screen and (min-width:768px) {
+            display: none;
+        }
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: white;
+        width: 100vw;
+        height: 21.25rem;
+        margin-left: -2.375rem;
+        margin-top: 5.625rem;
+        padding: 2.5rem;
+        border-radius: 0px 0px 0.5rem 0.5rem;
+        @media screen and (max-width:600px) {
+            height: auto;
+        }
+        @media screen and (max-width:375px) {
+            margin-left: 0;
+        }
+        >div{
+            display: block;
+            left: 0;
+            z-index: -1;
+        }
+    }
 }
