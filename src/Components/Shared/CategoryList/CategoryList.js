@@ -45,17 +45,16 @@ export const CategoryProduct = ({ img, children, path }) =>{
     navigate(url+path);
   };
   return (
-    <motion.div 
-      whileHover={{scale:1.05}}
-      transition={{type:'spring', duration:0.2}}
-      className={`${styles.categoryProduct} btnCatProduct`}>
-      <div >
-        <img src={img} alt={`${children} category`}></img>
+    <div className={`${styles.categoryProduct} btnCatProduct`}>
+      <div onClick={() => handleClick(path)}>
+        <motion.img 
+          whileHover={{scale:1.05}}
+          transition={{type:'spring', duration:0.2}}
+          src={img} alt={`${children} category`}></motion.img>
         <span>{children}</span>
-        <span><ShopButton onClick={() => handleClick(path)} /></span>
-      </div>
-     
-    </motion.div>
+        <span><ShopButton  /></span>
+      </div>     
+    </div>
   );
 };
 

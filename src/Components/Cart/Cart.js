@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Modal from '../UI/Modal/Modal';
 import UserProgressContext from '../../store/UserProgress';
 import styles from './Cart.module.scss';
@@ -30,6 +30,10 @@ const Cart = () =>{
   const handleCheckout = () =>{
     showCheckout();
   };
+
+  useEffect(()=>{
+    if(totalItems===0) hideCart();
+  },[totalItems]);
 
   return(
     <Modal className={styles.cartModal} open={progress==='cart'} handleClose={handleClose}>

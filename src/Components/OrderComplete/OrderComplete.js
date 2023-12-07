@@ -25,7 +25,7 @@ const OrderComplete = () =>{
   },[items,progress]);
   
   return(
-    items.length && (
+    items.length >0  && (
       <Modal className={styles.orderComplete} open={progress==='completed'} handleClose={handleClose}>
         <div>
           <img src={icon}></img>

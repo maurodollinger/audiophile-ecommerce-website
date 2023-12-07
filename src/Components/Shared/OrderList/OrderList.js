@@ -29,7 +29,7 @@ const OrderList = ({ items, isModal = true, onCountChange,  goToCheckout, disabl
     ? null
     : {
       shipping: 50,
-      vat: 1079,
+      vat: totalAmount * 0.2,
     };
 
   const grandTotal = isModal ? null : totalAmount + payloadInfo.shipping + payloadInfo.vat;

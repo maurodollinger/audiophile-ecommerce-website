@@ -9,6 +9,7 @@ import UserProgressContext from '../../store/UserProgress';
 import CartContext from '../../store/CartContext';
 import { useInView, animate, stagger, motion } from 'framer-motion';
 import FadeInElement from '../Animations/FadeInElement';
+import ZoomInElement from '../Animations/ZoomInElement';
 
 const Home = () =>{
   const {progress,cleanUserProgress} = useContext(UserProgressContext);
@@ -16,7 +17,7 @@ const Home = () =>{
   const navigate = useNavigate();
 
   const productOne = useRef(null);
-  const triggerSpanAnimation = useInView(productOne);
+  const triggerSpanAnimation = useInView(productOne,{ threshold: 1.0});
   
   const handleClick = (path)=>{
     navigate('product/'+path);
@@ -29,6 +30,7 @@ const Home = () =>{
     }
   },[progress]);
 
+
   useEffect(()=>{
     if(triggerSpanAnimation){
       animate('.spanAnimation span', {scale:1}, {type:'spring', duration:0.5, delay:stagger(0.1)});
@@ -36,7 +38,7 @@ const Home = () =>{
     }
     else {
       animate('.spanAnimation span', {scale:0.3}, {type:'spring', duration:0.3, delay:stagger(0.1)});
-      animate('.bigMonitor',{scale:0.9,y:20});
+      animate('.bigMonitor',{scale:0.85,y:20});
     }
   },[triggerSpanAnimation]);
   
@@ -85,18 +87,16 @@ const Home = () =>{
               </div>
             </FadeInElement>
             <FadeInElement>
-              <motion.div 
-                whileHover={{backgroundPosition:0, transition:{type:'spring'}}}
-                className={styles.productTwo}>
+              <ZoomInElement className={styles.productTwo}>
                 <div className={styles.productTitle}>
                   <h4>ZX7 SPEAKER</h4>
                   <Button type='two' onClick={()=>handleClick('zx7-speaker')}>See product</Button>
                 </div>
-              </motion.div>
+              </ZoomInElement>
             </FadeInElement>
             <FadeInElement>
               <div className={styles.productThree}>
-                <motion.div whileHover={{backgroundPosition:0, transition:{type:'spring'}}}></motion.div >
+                <ZoomInElement></ZoomInElement>
                 <div>
                   <h4>YX1 EARPHONES</h4>
                   <Button type='two' onClick={()=>handleClick('yx1-earphones')}>See product</Button>

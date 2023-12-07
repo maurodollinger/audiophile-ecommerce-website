@@ -6,6 +6,7 @@ import ProductCard from '../Shared/ProductCard/ProductCard';
 import PropTypes from 'prop-types';
 import RelatedProducts from '../Shared/RelatedProducts/RelatedProducts';
 import FadeInElement from '../Animations/FadeInElement';
+import ZoomInElement from '../Animations/ZoomInElement';
 
 export const ProductFeatures = ({ features }) => {
   const featureLines = features.split('\n');
@@ -58,11 +59,11 @@ const Gallery = ({images}) =>{
   return (
     <div className={styles.productGallery}>
       <div className={styles.productGalleryLeft}>
-        <div style={{ backgroundImage: `url(${getImage})` }}></div>
-        <div style={{ backgroundImage: `url(${getImage})` }}></div>
+        <ZoomInElement style={{ backgroundImage: `url(${getImage})` }}></ZoomInElement>
+        <ZoomInElement style={{ backgroundImage: `url(${getImage})` }}></ZoomInElement>
       </div>
-      <div className={styles.productGalleryRight} style={{ backgroundImage: `url(${getImage})` }}>
-      </div>
+      <ZoomInElement className={styles.productGalleryRight} style={{ backgroundImage: `url(${getImage})` }}>
+      </ZoomInElement>
     </div>
   );
 };

@@ -41,4 +41,20 @@
         opacity: 0.5;
         cursor: not-allowed;
     }
+    position: relative;
+    overflow: hidden;
+    svg {
+        position: absolute;
+        top: 0;
+        left: -75%; 
+        width: 200%;
+        height: 100%;
+        opacity: 0;
+        transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      }
+    
+      &:hover svg {
+        left: 0; 
+        opacity: .5;
+      }
 }
