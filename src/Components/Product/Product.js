@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ProductCard from '../Shared/ProductCard/ProductCard';
 import PropTypes from 'prop-types';
 import RelatedProducts from '../Shared/RelatedProducts/RelatedProducts';
-
+import FadeInElement from '../Animations/FadeInElement';
 
 export const ProductFeatures = ({ features }) => {
   const featureLines = features.split('\n');
@@ -95,20 +95,27 @@ const Product = () =>{
         {!product ? <div>Loading...</div> :
           (
             <div className={styles.productContainer}>
-              <ProductCard product={product} index='0' type='product'/>
-              <div className={styles.productFeatures}>
-                <div>
-                  <h3>Features</h3>
-                  <ProductFeatures features={product.features}/>
+              <FadeInElement>
+                <ProductCard product={product} index='0' type='product'/>
+              </FadeInElement>
+              <FadeInElement>
+                <div className={styles.productFeatures}>
+                  <div>
+                    <h3>Features</h3>
+                    <ProductFeatures features={product.features}/>
+                  </div>
+                  <div>
+                    <h3>In the box</h3>
+                    <IncludesItemsList includes={product.includes}/>
+                  </div>
                 </div>
-                <div>
-                  <h3>In the box</h3>
-                  <IncludesItemsList includes={product.includes}/>
-                </div>
-              </div>
-            
-              <Gallery images={product.gallery}/>
-              <RelatedProducts products={product.others}/>
+              </FadeInElement>
+              <FadeInElement>
+                <Gallery images={product.gallery}/>
+              </FadeInElement>
+              <FadeInElement>
+                <RelatedProducts products={product.others}/>
+              </FadeInElement>
             </div>
           )
         }

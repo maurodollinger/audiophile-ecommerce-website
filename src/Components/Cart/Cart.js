@@ -32,7 +32,6 @@ const Cart = () =>{
   };
 
   return(
-    
     <Modal className={styles.cartModal} open={progress==='cart'} handleClose={handleClose}>
       <div>
         {

@@ -1,6 +1,14 @@
 import React from 'react';
 import styles from './Footer.module.scss';
-import { Link } from 'react-router-dom';
+import NavItem from '../Shared/NavItem';
+
+const items = [
+  {name:'Home',link:''},
+  {name:'Headphones',link:'category/headphones'},
+  {name:'Speakers',link:'category/speakers'},
+  {name:'Earphones',link:'category/earphones'},
+];
+
 
 const Footer = () =>{
   return (
@@ -9,10 +17,10 @@ const Footer = () =>{
         <nav>
           <div className={styles.logo}></div>
           <ul>
-            <li><Link to=''>Home</Link></li>
-            <li><Link to=''>Headphones</Link></li>
-            <li><Link to=''>Speakers</Link></li>
-            <li><Link to=''>Earphones</Link></li>
+            {
+              items.map((i,index)=>(
+                <NavItem key={index} index={index} i={i} />
+              ))}
           </ul>   
         </nav>
         <div className={styles.paragraph}>

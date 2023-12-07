@@ -92,16 +92,17 @@ header{
             li{
                 a{
                     cursor: pointer;
-                    color: #FFF;
-                    &:hover{
+                  //  color: #FFF;
+                  /*  &:hover{
                         color: #D87D4A;
-                    }
+                    }*/
                 }                
             }
         }
     }
     .btnCart{
         background-image: url('/assets/shared/desktop/icon-cart.svg');
+        background-repeat: no-repeat;
         width: 1.45831rem;
         height: 1.25rem;
         flex-shrink: 0;

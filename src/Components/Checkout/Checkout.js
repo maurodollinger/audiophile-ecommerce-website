@@ -11,6 +11,7 @@ import * as Yup from 'yup';
 import { useForm } from '../../store/FormContext';
 import UserProgressContext from '../../store/UserProgress';
 import { useNavigate } from 'react-router-dom';
+import FadeInElement from '../Animations/FadeInElement';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -277,13 +278,13 @@ const Checkout = () =>{
     <section className={styles.checkout}>
       <div className='container'>
         <span onClick={()=>navigate(-1)}>Go Back</span>
-        <div>
+        <FadeInElement>
           <CheckoutFormContainer/>
           <Card className={styles.summary}>
             <h6>Summary</h6>
             <OrderList items={cartCtx.items} isModal={false} disabledSubmit={!isFormValid} onSubmit={handleSubmit}/>
           </Card>
-        </div>
+        </FadeInElement>
         
       </div>
 

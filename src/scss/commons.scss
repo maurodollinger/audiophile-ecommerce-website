@@ -144,6 +144,9 @@ a{
 }
 
 .modal{
+    padding: 2rem;
+    border-radius: 0.5rem;
+    background: #FFF;
     display: none;
     &.open{
         display: block;

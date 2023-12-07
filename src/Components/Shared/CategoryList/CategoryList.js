@@ -7,6 +7,7 @@ import speakersImage from '../../../assets/shared/desktop/image-category-thumbna
 import earphonesImage from '../../../assets/shared/desktop/image-category-thumbnail-earphones.png';
 import ShopButton from '../../UI/ShopButton/ShopButton';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const CategoryList = () =>{
   let list;
@@ -44,14 +45,17 @@ export const CategoryProduct = ({ img, children, path }) =>{
     navigate(url+path);
   };
   return (
-    <div className={`${styles.categoryProduct} btnCatProduct`}>
+    <motion.div 
+      whileHover={{scale:1.05}}
+      transition={{type:'spring', duration:0.2}}
+      className={`${styles.categoryProduct} btnCatProduct`}>
       <div >
         <img src={img} alt={`${children} category`}></img>
         <span>{children}</span>
         <span><ShopButton onClick={() => handleClick(path)} /></span>
       </div>
      
-    </div>
+    </motion.div>
   );
 };
 

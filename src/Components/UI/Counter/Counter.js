@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Counter.module.scss';
+import {motion} from 'framer-motion';
 
 const Counter = ({ onCountChange, initialCount = 1,  small = false }) => {
   const [count, setCount] = useState(initialCount);
@@ -28,7 +29,12 @@ const Counter = ({ onCountChange, initialCount = 1,  small = false }) => {
   return (
     <div className={`${styles.counter} ${small ? styles.small : ''}`}>
       <button onClick={decrement}>-</button>
-      <span>{Math.round(count)}</span>
+      <motion.span 
+        key={count}
+        initial={{opacity:0,y:10}}
+        animate={{opacity:1,y:0}}>
+        {Math.round(count)}
+      </motion.span>
       <button onClick={increment}>+</button>
     </div>
   );

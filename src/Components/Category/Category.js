@@ -5,6 +5,7 @@ import products from '../../mockup/products.json';
 import ProductCard from '../Shared/ProductCard/ProductCard';
 import CategoryList from '../Shared/CategoryList/CategoryList';
 import PromoSection from '../Shared/Promo/Promo';
+import FadeInElement from '../Animations/FadeInElement';
 
 const Category =() =>{
   const { categoryName } = useParams();
@@ -33,7 +34,9 @@ const Category =() =>{
       <div className={styles.productsContainer}>
         <div className='container'>
           {filteredProducts.map((product,index) => (
-            <ProductCard key={product.id} product={product} index={index.toString()} type='category'/>
+            <FadeInElement key={product.id}>
+              <ProductCard product={product} index={index.toString()} type='category'/>
+            </FadeInElement>
           ))}
         </div>
       </div>
