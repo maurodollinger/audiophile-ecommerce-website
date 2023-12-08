@@ -9,7 +9,6 @@ import UserProgressContext from '../../store/UserProgress';
 import CartContext from '../../store/CartContext';
 import { useInView, animate, stagger, motion } from 'framer-motion';
 import FadeInElement from '../Animations/FadeInElement';
-import ZoomInElement from '../Animations/ZoomInElement';
 
 const Home = () =>{
   const {progress,cleanUserProgress} = useContext(UserProgressContext);
@@ -31,6 +30,7 @@ const Home = () =>{
   },[progress]);
 
 
+  
   useEffect(()=>{
     if(triggerSpanAnimation){
       animate('.spanAnimation span', {scale:1}, {type:'spring', duration:0.5, delay:stagger(0.1)});
@@ -42,6 +42,11 @@ const Home = () =>{
     }
   },[triggerSpanAnimation]);
   
+  useEffect(()=>{
+    animate('.spanAnimation span', {scale:0.3}, {type:'spring', duration:0.3, delay:stagger(0.1)});
+    animate('.bigMonitor',{scale:0.85,y:20});
+  },[]);
+ 
 
   return(
     <Fragment>
@@ -87,16 +92,16 @@ const Home = () =>{
               </div>
             </FadeInElement>
             <FadeInElement>
-              <ZoomInElement className={styles.productTwo}>
+              <div className={styles.productTwo}>
                 <div className={styles.productTitle}>
                   <h4>ZX7 SPEAKER</h4>
                   <Button type='two' onClick={()=>handleClick('zx7-speaker')}>See product</Button>
                 </div>
-              </ZoomInElement>
+              </div>
             </FadeInElement>
             <FadeInElement>
               <div className={styles.productThree}>
-                <ZoomInElement></ZoomInElement>
+                <div></div>
                 <div>
                   <h4>YX1 EARPHONES</h4>
                   <Button type='two' onClick={()=>handleClick('yx1-earphones')}>See product</Button>

@@ -62,8 +62,8 @@ const Header = () =>{
         </motion.div>
         {isMobileMenuOpen && (
           <div className={styles.mobileCategoryDrop}>
-            <div className='backdrop' ></div>
-            <CategoryList/>
+            <div className='backdrop'  onClick={handleMobileMenuToggle}></div>
+            <CategoryList callbackCloseMenu={handleMobileMenuToggle}/>
           </div>
         )}
       </nav>

@@ -271,12 +271,17 @@
     .productThree{
         align-items: center;        
         gap:1.88rem;
+        @media screen and (min-width:1024px) {
+            div:last-child{
+                padding-left:6rem;
+            }
+        }
         @media screen and (min-width:769px) {
             > div{
                 width: 50%;
             }
             div:last-child{
-                padding-left:6rem;
+                padding-left:2rem;
             }
         }
         @media screen and (max-width:768px) {

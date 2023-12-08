@@ -9,7 +9,8 @@ import ShopButton from '../../UI/ShopButton/ShopButton';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-const CategoryList = () =>{
+// eslint-disable-next-line react/prop-types
+const CategoryList = ({callbackCloseMenu}) =>{
   let list;
   list = [
     {title:'headphones',img:headphonesImage},
@@ -19,14 +20,14 @@ const CategoryList = () =>{
   return (
     <section className={styles.categoryList}> 
       {list.map((l, i)=>(
-        <CategoryProduct key={i} img={l.img} path={l.title}>{l.title}</CategoryProduct>
+        <CategoryProduct key={i} img={l.img} path={l.title} callbackCloseMenu={callbackCloseMenu}>{l.title}</CategoryProduct>
       ))}
       
     </section>
   );
 };
 
-export const CategoryProduct = ({ img, children, path }) =>{
+export const CategoryProduct = ({ img, children, path, callbackCloseMenu}) =>{
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -43,6 +44,7 @@ export const CategoryProduct = ({ img, children, path }) =>{
   const handleClick = (path) =>{
     const url = cleanString(location.pathname);
     navigate(url+path);
+    callbackCloseMenu();
   };
   return (
     <div className={`${styles.categoryProduct} btnCatProduct`}>
@@ -63,7 +65,8 @@ CategoryProduct.propTypes ={
   children:PropTypes.node.isRequired,
   img:PropTypes.string.isRequired,
   path:PropTypes.string.isRequired,
-  showShopButton:PropTypes.bool
+  showShopButton:PropTypes.bool,
+  callbackCloseMenu:PropTypes.func
 };
 
 export default CategoryList;

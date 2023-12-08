@@ -1,14 +1,14 @@
 .productCard{
     display: flex;
-    height: 35rem;
+   
     @media screen and (min-width: 769px){
-
+        height: 35rem;
         > div{
             width: 50%;
         }
         >div:last-child{
 
-        background-size: cover;
+             background-size: cover;
             > div{
                 padding-left:calc(7.8rem /  33.75rem) * 100%;
             }
@@ -25,28 +25,57 @@
         }
     }
     @media screen and (max-width: 768px){
-        flex-direction:column;
-        > div{
-            width: 100%;
+        
+        &.categoryType{
+            flex-direction:column;
+            > div{
+                width: 100%;
+            }
+            >div:first-child{
+                height: 22rem;
+                background-size: 50%;
+                background-repeat: no-repeat;
+            }
+            >div:last-child{
+    
+                text-align: center;
+                margin: 3.25rem auto 0;
+                max-width:  35.75rem;
+                width: 100%;
+            }
         }
-        >div:first-child{
-            height: 22rem;
-            background-size: 50%;
-            background-repeat: no-repeat;
-        }
-        >div:last-child{
-
-            text-align: center;
-            margin: 3.25rem auto 0;
-            max-width:  35.75rem;
-            width: 100%;
-        }
+       &.productType{
+            flex-direction: row;
+            gap:4.34rem;
+            > div{
+                width: 50%;
+            }
+            >div:first-child{
+                height: 30rem;
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+       }
     }
 
+    @media screen and (max-width:600px) {
+        &.productType{
+            flex-direction: column;
+            gap:2rem;
+            > div{
+                width: 100%;
+            }
+            >div:first-child{
+                height: 20.4375rem;
+            }
+        }
+    }
     >div:first-child{
         border-radius: 0.5rem;
         background-position: center;
         background-color: #F1F1F1;
+        background-repeat: no-repeat;
+        background-size: contain;
     }
     >div:last-child{
         display: flex;
@@ -61,10 +90,15 @@
         opacity: 0.5;
         margin-bottom: 2.5rem;
     }
+    span{
+        display: block;
+        margin-bottom: 1rem;
+    }
     h3{
-        margin: 1rem 0 2rem 0;
+        margin-bottom: 2rem;
     }
    .shopActions{
+        display: flex;
         margin-top:3rem;
    }
 }

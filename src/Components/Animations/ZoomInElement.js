@@ -2,13 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 // eslint-disable-next-line react/prop-types
-const ZoomInElement = ({ children, className, style}) => {
+const ZoomInElement = ({ children, className, style }) => {
   return (
     <motion.div
-      initial={{backgroundSize:'100%'}}
-      whileHover={{backgroundSize:'105%', transition:{type:'spring'}}}
+      initial={{ scale: 1 }}
+      whileHover={{ scale: 1.05, transition: { type: 'spring' } }}
       className={className}
-      style={style}
+      style={{ ...style, transformOrigin: 'center center' }}
     >
       {children}
     </motion.div>

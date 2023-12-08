@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import Counter from '../../UI/Counter/Counter';
 import CartContext from '../../../store/CartContext';
 import { currencyFormatter } from '../../../utils/formatting';
-import ZoomInElement from '../../Animations/ZoomInElement';
 
 const ProductCard = ({product, index, type}) => {
   const { mobile, tablet, desktop } = product.image;
@@ -40,8 +39,8 @@ const ProductCard = ({product, index, type}) => {
   
 
   return (
-    <section className={`${styles.productCard} ${(index % 2===0) ? '' : styles.odd}`}>
-      <ZoomInElement className={styles.imageCard} 
+    <section className={`${styles.productCard} ${(index % 2===0) ? '' : styles.odd} ${(type === PRODUCT_TYPE) ? styles.productType : styles.categoryType}`}>
+      <div className={styles.imageCard} 
         style={{
           backgroundImage: `url(${path+mobile})`,
           '@media (minWidth: 769px)': {
@@ -51,10 +50,10 @@ const ProductCard = ({product, index, type}) => {
             backgroundImage: `url(${path+desktop})`,
           },
         }}>
-      </ZoomInElement>
+      </div>
       <div className={styles.infoCard}>
         <div>
-          <span className='overline orange'>new product</span>
+          {(product.new) && (<span className='overline orange'>new product</span>)}
           <h3>{product.name}</h3>
           <p>{product.description}</p>
           {(type === CATEGORY_TYPE) && (
