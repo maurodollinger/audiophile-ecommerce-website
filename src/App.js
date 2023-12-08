@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Route, Routes, Outlet } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import Home from './Components/Home/Home';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
@@ -17,11 +17,11 @@ function App() {
   return (
     <Fragment>
       <Routes>
-        <Route path='audiophile-ecommerce-website/build' element={<Layout />}>
-          <Route index path='' element={<Home />}></Route>
-          <Route path="category/:categoryName" element={<Category />} />
-          <Route path="product/:productName" element={<Product/>}/>
-          <Route path="checkout" element={<Checkout/>}/>
+        <Route basename='/audiophile-ecommerce-website/*' element={<Layout />}>
+          <Route index path='/' element={<Home />} />
+          <Route path='/category/:categoryName' element={<Category />} />
+          <Route path='/product/:productName' element={<Product />} />
+          <Route path='/checkout' element={<Checkout />} />
         </Route>
       </Routes>
     </Fragment>

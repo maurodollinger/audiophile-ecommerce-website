@@ -8,7 +8,7 @@ const RelatedProducts = ({products}) =>{
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const navigate = useNavigate();
   
-  const path = '../';
+  const path = '';
   useEffect(() => {
     const handleResize = () => {
       setWindowSize(window.innerWidth);

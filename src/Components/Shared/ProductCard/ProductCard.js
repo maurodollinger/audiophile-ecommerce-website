@@ -11,7 +11,7 @@ import ZoomInElement from '../../Animations/ZoomInElement';
 const ProductCard = ({product, index, type}) => {
   const { mobile, tablet, desktop } = product.image;
   const navigate = useNavigate();
-  const path = '../';
+  const path = '';
   const cartCtx = useContext(CartContext);
   const CATEGORY_TYPE = 'category';
   const PRODUCT_TYPE = 'product';

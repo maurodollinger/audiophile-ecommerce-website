@@ -4,26 +4,28 @@ import Counter from '../../UI/Counter/Counter';
 import styles from './OrderList.module.scss';
 import PropTypes from 'prop-types';
 import Button from '../../UI/Button/Button';
-import { useLocation } from 'react-router-dom';
+//import { useLocation } from 'react-router-dom';
 
+/*
 function fixURL(path,string) {
   const url = path+string;
-  const regex = /\/build\/(.*?)\/assets/;
+  const regex = /\/audiophile-ecommerce-website\/(.*?)\/assets/;
   const match = url.match(regex);
 
   if (match && match[1]) {
     const rutaExtraida = match[1];
-    const regexRutaCompleta = new RegExp(`/build/${rutaExtraida}/assets`);
-    const urlAjustada = url.replace(regexRutaCompleta, '/build/assets').replace('./assets', '/assets');
+    const regexRutaCompleta = new RegExp(`/audiophile-ecommerce-website/${rutaExtraida}/assets`);
+    const urlAjustada = url.replace(regexRutaCompleta, '/audiophile-ecommerce-website/assets').replace('./assets', '/assets');
     return urlAjustada;
   }
 
-  return 'build/'+string;
-}
+  return 'audiophile-ecommerce-website/'+string;
+}*/
+
 const OrderList = ({ items, isModal = true, onCountChange,  goToCheckout, disabledSubmit = true, onSubmit }) => {
   const totalAmount = items.reduce((acc, { price, quantity }) => acc + price * quantity, 0);
-  const location = useLocation();
-  const path = location.pathname;
+  //const location = useLocation();
+  //const path = location.pathname;
 
   const payloadInfo = isModal
     ? null
@@ -56,7 +58,7 @@ const OrderList = ({ items, isModal = true, onCountChange,  goToCheckout, disabl
         {items.map((item) => (
           <li key={item.id}>
             <div className={styles.image}>
-              <img src={fixURL(path, item.image.mobile)} alt={item.name} />
+              <img src={item.image.mobile} alt={item.name} />
             </div>
             <div className={styles.info}>
               <p>

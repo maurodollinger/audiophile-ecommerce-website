@@ -33,7 +33,7 @@ const IncludesItemsList = ({ includes }) => {
 
 const Gallery = ({images}) =>{
   const [windowSize, setWindowSize] = useState(window.innerWidth);
-  const path = '../';
+  const path = '';
   useEffect(() => {
     const handleResize = () => {
       setWindowSize(window.innerWidth);
