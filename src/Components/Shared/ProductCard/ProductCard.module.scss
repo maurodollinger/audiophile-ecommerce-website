@@ -90,7 +90,7 @@
         opacity: 0.5;
         margin-bottom: 2.5rem;
     }
-    span{
+    span.newProduct{
         display: block;
         margin-bottom: 1rem;
     }
@@ -100,5 +100,7 @@
    .shopActions{
         display: flex;
         margin-top:3rem;
+        flex-wrap: wrap;
+        gap:1rem
    }
 }

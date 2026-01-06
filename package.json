@@ -46,6 +46,8 @@
   "devDependencies": {
     "eslint": "^8.52.0",
     "eslint-plugin-react": "^7.33.2",
-    "sass": "^1.68.0"
+    "sass": "^1.68.0",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/parser": "^5.5.0"
   }
 }

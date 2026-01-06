@@ -53,7 +53,7 @@ const ProductCard = ({product, index, type}) => {
       </div>
       <div className={styles.infoCard}>
         <div>
-          {(product.new) && (<span className='overline orange'>new product</span>)}
+          {(product.new) && (<span className={`${styles.newProduct} overline orange`}>new product</span>)}
           <h3>{product.name}</h3>
           <p>{product.description}</p>
           {(type === CATEGORY_TYPE) && (
