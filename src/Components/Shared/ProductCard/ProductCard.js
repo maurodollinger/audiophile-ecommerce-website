@@ -22,7 +22,7 @@ const ProductCard = ({product, index, type}) => {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const imageY = useTransform(scrollYProgress, [0, 1], ['-5%', '5%']);
   const navigate = useNavigate();
-  const path = 'audiophile-ecommerce-website/';
+  const path = '';
   const cartCtx = useContext(CartContext);
   const CATEGORY_TYPE = 'category';
   const PRODUCT_TYPE = 'product';
