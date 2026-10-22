@@ -59,7 +59,7 @@ const RelatedProducts = ({products}) =>{
             whileHover='hover'
           >
             <div className={styles.relImage}>
-              <motion.img variants={imageHover} src={`audiophile-ecommerce-website/${getImage(p.image)}`} alt={p.name}/>
+              <motion.img variants={imageHover} src={getImage(p.image)} alt={p.name}/>
             </div>
             <div>
               <h5>{p.name}</h5>
