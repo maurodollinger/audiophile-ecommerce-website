@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/audiophile-ecommerce-website/static/css/main.5e57e545.css",
-    "main.js": "/audiophile-ecommerce-website/static/js/main.22502aac.js",
-    "static/js/787.5f17d451.chunk.js": "/audiophile-ecommerce-website/static/js/787.5f17d451.chunk.js",
+    "main.css": "/audiophile-ecommerce-website/static/css/main.ec2da1c5.css",
+    "main.js": "/audiophile-ecommerce-website/static/js/main.a4cc5dde.js",
+    "static/js/453.c22cacaf.chunk.js": "/audiophile-ecommerce-website/static/js/453.c22cacaf.chunk.js",
     "static/media/image-hero.png": "/audiophile-ecommerce-website/static/media/image-hero.7704357284d713dcf503.png",
     "static/media/image-speaker-zx9.png": "/audiophile-ecommerce-website/static/media/image-speaker-zx9.153cd899b91a08b22b1a.png",
     "static/media/image-category-thumbnail-headphones.png": "/audiophile-ecommerce-website/static/media/image-category-thumbnail-headphones.fbd401d9c735a217286f.png",
@@ -16,12 +16,12 @@
     "index.html": "/audiophile-ecommerce-website/index.html",
     "static/media/icon-order-confirmation.svg": "/audiophile-ecommerce-website/static/media/icon-order-confirmation.6970134820e756e31360b1293c6f3e62.svg",
     "static/media/icon-hamburger.svg": "/audiophile-ecommerce-website/static/media/icon-hamburger.f8a9f0cf12d419a7d185.svg",
-    "main.5e57e545.css.map": "/audiophile-ecommerce-website/static/css/main.5e57e545.css.map",
-    "main.22502aac.js.map": "/audiophile-ecommerce-website/static/js/main.22502aac.js.map",
-    "787.5f17d451.chunk.js.map": "/audiophile-ecommerce-website/static/js/787.5f17d451.chunk.js.map"
+    "main.ec2da1c5.css.map": "/audiophile-ecommerce-website/static/css/main.ec2da1c5.css.map",
+    "main.a4cc5dde.js.map": "/audiophile-ecommerce-website/static/js/main.a4cc5dde.js.map",
+    "453.c22cacaf.chunk.js.map": "/audiophile-ecommerce-website/static/js/453.c22cacaf.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5e57e545.css",
-    "static/js/main.22502aac.js"
+    "static/css/main.ec2da1c5.css",
+    "static/js/main.a4cc5dde.js"
   ]
 }
