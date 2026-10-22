@@ -39,6 +39,19 @@
             font-weight: 500;
             line-height: 1.5625rem;
             cursor: pointer;
+            transition: opacity var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+            .arrow{
+                display: inline-block;
+                margin-right: 0.5rem;
+                transition: transform var(--dur-fast) var(--ease-out);
+            }
+            &:hover{
+                opacity: 1;
+                color: var(--orange);
+                .arrow{
+                    transform: translateX(-0.35rem);
+                }
+            }
         }
     }
     .checkoutFormContainer{
@@ -108,6 +121,10 @@
         padding: 1.2rem 1.5rem 1.19rem;
         margin-bottom: 0.5rem;
         outline: none;
+        transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+        &:focus{
+            box-shadow: 0 0 0 4px rgba(216,125,74,0.15);
+        }
         &::placeholder{
             color:rgba(0,0,0,0.4);
         }
@@ -125,6 +142,8 @@
         border: 1px solid #CFCFCF;
         background: #FFF;
         align-items: center;
+        cursor: pointer;
+        transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
         &:hover{
             border-color: #D87D4A!important;
         }
@@ -143,14 +162,18 @@
             height: 1.25rem;
             margin:1.12rem 1rem;
         }
-        .selected circle:nth-child(2) {
-           display: block;
-        }
         circle:nth-child(2) {
-            display: none;
+            transform-box: fill-box;
+            transform-origin: center;
+            transform: scale(0);
+            transition: transform var(--dur-base) var(--ease-out);
+        }
+        .selected circle:nth-child(2) {
+            transform: scale(1);
         }
         &.selected {
             border-color: #D87D4A!important;
+            box-shadow: 0 0 0 4px rgba(216,125,74,0.1);
         }
     }
     .summary{

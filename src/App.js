@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
 import Home from './Components/Home/Home';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
@@ -12,18 +13,25 @@ import { CartContextProvider } from './store/CartContext';
 import Checkout from './Components/Checkout/Checkout';
 import { FormProvider } from './store/FormContext';
 import OrderComplete from './Components/OrderComplete/OrderComplete';
+import SmoothScroll from './Components/Animations/SmoothScroll';
+import PageTransition from './Components/Animations/PageTransition';
+import { baseTransition } from './Components/Animations/motion';
 
 function App() {
   return (
     <Fragment>
-      <Routes>
-        <Route basename='/audiophile-ecommerce-website/*' element={<Layout />}>
-          <Route index path='/' element={<Home />} />
-          <Route path='/category/:categoryName' element={<Category />} />
-          <Route path='/product/:productName' element={<Product />} />
-          <Route path='/checkout' element={<Checkout />} />
-        </Route>
-      </Routes>
+      <MotionConfig reducedMotion='user' transition={baseTransition}>
+        <SmoothScroll>
+          <Routes>
+            <Route basename='/audiophile-ecommerce-website/*' element={<Layout />}>
+              <Route index path='/' element={<Home />} />
+              <Route path='/category/:categoryName' element={<Category />} />
+              <Route path='/product/:productName' element={<Product />} />
+              <Route path='/checkout' element={<Checkout />} />
+            </Route>
+          </Routes>
+        </SmoothScroll>
+      </MotionConfig>
     </Fragment>
   );
 }
@@ -35,7 +43,7 @@ function Layout() {
         <CartContextProvider>
           <FormProvider>
             <Header></Header>
-            <Outlet></Outlet>
+            <PageTransition></PageTransition>
             <Footer></Footer>
             <Cart></Cart>
             <OrderComplete></OrderComplete>

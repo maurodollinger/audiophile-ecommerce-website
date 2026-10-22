@@ -5,7 +5,7 @@ import products from '../../mockup/products.json';
 import ProductCard from '../Shared/ProductCard/ProductCard';
 import CategoryList from '../Shared/CategoryList/CategoryList';
 import PromoSection from '../Shared/Promo/Promo';
-import FadeInElement from '../Animations/FadeInElement';
+import MaskText from '../Animations/MaskText';
 
 const Category =() =>{
   const { categoryName } = useParams();
@@ -21,22 +21,19 @@ const Category =() =>{
   const location = useLocation();
   useEffect(()=>{
     document.title = `Category ${categoryName} - AudioPhile E-commerce`;
-    window.scrollTo(0, 0);
   },[location]);
 
   return(
     <section className={styles.category}>
       <div>
         <div className='container'>
-          <h2>{categoryName}</h2>
+          <MaskText as='h2' key={categoryName} text={categoryName} inView={false} delay={0.4} />
         </div>
       </div>      
       <div className={styles.productsContainer}>
         <div className='container'>
           {filteredProducts.map((product,index) => (
-            <FadeInElement key={product.id}>
-              <ProductCard product={product} index={index.toString()} type='category'/>
-            </FadeInElement>
+            <ProductCard key={product.id} product={product} index={index.toString()} type='category'/>
           ))}
         </div>
       </div>

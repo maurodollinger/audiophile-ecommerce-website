@@ -6,6 +6,7 @@
     z-index: 999;
     border: 0;
     margin-top: 8rem;
+    transform-origin: top right;
     @media screen and (min-width:768px){        
         margin-right: calc(10.31rem / 90rem) *100%;
     }

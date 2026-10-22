@@ -8,6 +8,12 @@ import earphonesImage from '../../../assets/shared/desktop/image-category-thumbn
 import ShopButton from '../../UI/ShopButton/ShopButton';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Reveal } from '../../Animations/FadeInElement';
+import { fadeUp, SPRING } from '../../Animations/motion';
+
+const imageHover = {
+  hover: { y: -10, scale: 1.05, transition: SPRING },
+};
 
 // eslint-disable-next-line react/prop-types
 const CategoryList = ({callbackCloseMenu}) =>{
@@ -18,12 +24,12 @@ const CategoryList = ({callbackCloseMenu}) =>{
     {title:'earphones',img:earphonesImage}               
   ];
   return (
-    <section className={styles.categoryList}> 
+    <Reveal as='section' stagger={0.12} className={styles.categoryList}> 
       {list.map((l, i)=>(
         <CategoryProduct key={i} img={l.img} path={l.title} callbackCloseMenu={callbackCloseMenu}>{l.title}</CategoryProduct>
       ))}
       
-    </section>
+    </Reveal>
   );
 };
 
@@ -44,19 +50,18 @@ export const CategoryProduct = ({ img, children, path, callbackCloseMenu}) =>{
   const handleClick = (path) =>{
     const url = cleanString(location.pathname);
     navigate(url+path);
-    callbackCloseMenu();
+    if (callbackCloseMenu) callbackCloseMenu();
   };
   return (
-    <div className={`${styles.categoryProduct} btnCatProduct`}>
+    <motion.div className={`${styles.categoryProduct} btnCatProduct`} variants={fadeUp} whileHover='hover'>
       <div onClick={() => handleClick(path)}>
         <motion.img 
-          whileHover={{scale:1.05}}
-          transition={{type:'spring', duration:0.2}}
+          variants={imageHover}
           src={img} alt={`${children} category`}></motion.img>
         <span>{children}</span>
         <span><ShopButton  /></span>
       </div>     
-    </div>
+    </motion.div>
   );
 };
 

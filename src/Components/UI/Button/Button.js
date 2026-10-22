@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Button.module.scss';
 import { motion } from 'framer-motion';
+import { DURATION, EASE_OUT, SPRING } from '../../Animations/motion';
 
 const Button = (props) => {
   let type;
@@ -34,8 +35,8 @@ const Button = (props) => {
   return (
     <motion.button
       initial={{ backgroundColor }}
-      whileHover={{ backgroundColor: backgroundColorHover, transition: { type: 'spring', duration: 0.3 } }}
-      whileTap={{ scale: 0.96, transition: { duration: 0.01 } }}
+      whileHover={props.disabled ? undefined : { backgroundColor: backgroundColorHover, transition: { duration: DURATION.fast * 1.5, ease: EASE_OUT } }}
+      whileTap={props.disabled ? undefined : { scale: 0.96, transition: SPRING }}
       className={`${styles.button} ${type} ${props.disabled ? styles.disabled : ''}`}
       onClick={props.onClick}
       disabled={props.disabled}

@@ -15,8 +15,15 @@
         text-transform: uppercase;
         height: 1.125rem;
     }
+    span:first-child{
+        transition: color var(--dur-fast) var(--ease-out);
+    }
     span:last-child{
         width: 0.3125rem;
         height: 1rem;
+        transition: transform var(--dur-base) var(--ease-out);
+    }
+    &:hover span:last-child{
+        transform: translateX(0.35rem);
     }
 }

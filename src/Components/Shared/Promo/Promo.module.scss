@@ -67,5 +67,10 @@
             border-radius: 0.5rem;
         }
     }
-   
+    .underline{
+        background-image: linear-gradient(var(--orange), var(--orange));
+        background-repeat: no-repeat;
+        background-position: 0 100%;
+        padding-bottom: 0.05em;
+    }
 }

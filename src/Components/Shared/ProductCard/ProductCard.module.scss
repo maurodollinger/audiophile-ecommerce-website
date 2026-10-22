@@ -33,8 +33,9 @@
             }
             >div:first-child{
                 height: 22rem;
-                background-size: 50%;
-                background-repeat: no-repeat;
+                .imageLayer{
+                    background-size: 50%;
+                }
             }
             >div:last-child{
     
@@ -52,8 +53,6 @@
             }
             >div:first-child{
                 height: 30rem;
-                background-size: contain;
-                background-repeat: no-repeat;
             }
        }
     }
@@ -71,11 +70,18 @@
         }
     }
     >div:first-child{
+        position: relative;
+        overflow: hidden;
         border-radius: 0.5rem;
-        background-position: center;
         background-color: #F1F1F1;
+    }
+    .imageLayer{
+        position: absolute;
+        inset: -6% 0;
+        background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
+        will-change: transform;
     }
     >div:last-child{
         display: flex;

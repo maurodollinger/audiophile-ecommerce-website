@@ -1,28 +1,55 @@
-import React, {useRef} from 'react';
-import { motion, useInView } from 'framer-motion';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
+import { variants, staggerContainer, viewportOnce } from './motion';
 
-// eslint-disable-next-line react/prop-types
-const FadeInElement = ({ children }) => {
-
-
-  const ref = useRef(null);
-  const inView = useInView(ref,{ once: true, threshold: 0.2, });
-
-  const fadeInVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
+export const Reveal = ({ children, variant = 'fadeUp', delay, as = 'div', stagger, className, style, amount }) => {
+  const Component = motion[as];
+  const variantSet = stagger ? staggerContainer(stagger, delay) : variants[variant];
 
   return (
-    <motion.div
-      ref={ref}
+    <Component
+      className={className}
+      style={style}
       initial='hidden'
-      animate={inView ? 'visible' : 'hidden'}
-      variants={fadeInVariants}
+      whileInView='visible'
+      viewport={amount ? { ...viewportOnce, amount } : viewportOnce}
+      variants={variantSet}
+      custom={delay}
     >
       {children}
-    </motion.div>
+    </Component>
   );
 };
+
+Reveal.propTypes = {
+  children: PropTypes.node,
+  variant: PropTypes.oneOf(Object.keys(variants)),
+  delay: PropTypes.number,
+  as: PropTypes.string,
+  stagger: PropTypes.number,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  amount: PropTypes.number,
+};
+
+export const RevealItem = ({ children, variant = 'fadeUp', as = 'div', className, style }) => {
+  const Component = motion[as];
+  return (
+    <Component className={className} style={style} variants={variants[variant]}>
+      {children}
+    </Component>
+  );
+};
+
+RevealItem.propTypes = {
+  children: PropTypes.node,
+  variant: PropTypes.oneOf(Object.keys(variants)),
+  as: PropTypes.string,
+  className: PropTypes.string,
+  style: PropTypes.object,
+};
+
+const FadeInElement = (props) => <Reveal {...props} />;
 
 export default FadeInElement;
