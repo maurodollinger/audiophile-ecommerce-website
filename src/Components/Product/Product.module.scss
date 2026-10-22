@@ -17,6 +17,19 @@
             font-weight: 500;
             line-height: 1.5625rem;
             cursor: pointer;
+            transition: opacity var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+            .arrow{
+                display: inline-block;
+                margin-right: 0.5rem;
+                transition: transform var(--dur-fast) var(--ease-out);
+            }
+            &:hover{
+                opacity: 1;
+                color: var(--orange);
+                .arrow{
+                    transform: translateX(-0.35rem);
+                }
+            }
         }
         .productContainer{
             margin-top:3.5rem;
@@ -120,30 +133,32 @@
                 .productGalleryLeft{
                     width: 100%;
                     gap:1.25rem;
-                    >div{
-                        width: 100%;
-                    }
                 }
                 .productGalleryRight{
                     width: 100%;
                 }
             }
-            .productGalleryLeft div, .productGalleryRight{
-                background-size: cover;
-                background-position: center;
-            }
             .productGalleryLeft{
                 display: flex;
                 flex-direction: column;
                 height: auto;
-                div{
+                > .tile{
                     height: 50%;
                     width: 100%;
-                    border-radius: 0.5rem;
                 }
             }
-            .productGalleryRight{
+            .tile{
+                position: relative;
+                overflow: hidden;
                 border-radius: 0.5rem;
+                background-color: #F1F1F1;
+            }
+            .tileLayer{
+                position: absolute;
+                inset: 0;
+                background-size: cover;
+                background-position: center;
+                will-change: transform;
             }
         }
     }

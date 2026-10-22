@@ -11,7 +11,20 @@ import * as Yup from 'yup';
 import { useForm } from '../../store/FormContext';
 import UserProgressContext from '../../store/UserProgress';
 import { useNavigate } from 'react-router-dom';
-import FadeInElement from '../Animations/FadeInElement';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Reveal } from '../Animations/FadeInElement';
+import { baseTransition, DURATION, EASE_OUT, fadeUp } from '../Animations/motion';
+
+const cardVariants = {
+  hidden: fadeUp.hidden,
+  visible: { ...fadeUp.visible(), transition: { ...baseTransition, staggerChildren: 0.06, delayChildren: 0.15 } },
+};
+
+const swap = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0, transition: baseTransition },
+  exit: { opacity: 0, y: -12, transition: { duration: DURATION.fast, ease: EASE_OUT } },
+};
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -39,9 +52,18 @@ export const CustomInput = ({field,meta,placeholder}) =>{
   return(
     <>
       <input type="text" placeholder={placeholder} {...field} className={`${meta.error ? styles.invalid : ''}`}/>
-      {meta.touched && meta.error && (
-        <span className="error">{meta.error}</span>
-      )}
+      <AnimatePresence>
+        {meta.touched && meta.error && (
+          <motion.span
+            className="error"
+            initial={{ opacity: 0, y: -6, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: 'auto' }}
+            exit={{ opacity: 0, y: -6, height: 0 }}
+            transition={{ duration: DURATION.fast, ease: EASE_OUT }}
+            style={{ display: 'block' }}
+          >{meta.error}</motion.span>
+        )}
+      </AnimatePresence>
     </>
   );
 };
@@ -57,8 +79,8 @@ export const CheckoutFormContainer = () =>{
   const {showCompleted} = useContext(UserProgressContext);
   
   return(
-    <Card className={styles.checkoutFormContainer}>
-      <h3>Checkout</h3>    
+    <Card className={styles.checkoutFormContainer} variants={cardVariants}>
+      <motion.h3 variants={fadeUp}>Checkout</motion.h3>    
       <Formik
         initialValues={{
           name: '',
@@ -116,8 +138,8 @@ export const FormComponent = ({setFieldValue}) =>{
 
   return (
     <Form>
-      <span className='subtitle orange'>Billing Details</span>
-      <div className={styles.inputGroup}>
+      <motion.span className='subtitle orange' variants={fadeUp}>Billing Details</motion.span>
+      <motion.div className={styles.inputGroup} variants={fadeUp}>
         <div className={styles.half}>
           <label htmlFor='name'>Name</label>
           <Field type='text' name='name'>
@@ -149,9 +171,9 @@ export const FormComponent = ({setFieldValue}) =>{
             )}
           </Field>
         </div>
-      </div>    
-      <span className='subtitle orange'>shipping info</span>
-      <div className={styles.inputGroup}>
+      </motion.div>    
+      <motion.span className='subtitle orange' variants={fadeUp}>shipping info</motion.span>
+      <motion.div className={styles.inputGroup} variants={fadeUp}>
         <div className={styles.full}>
           <label htmlFor='address'>Adress</label>
           <Field type='text' name='address'>
@@ -163,8 +185,8 @@ export const FormComponent = ({setFieldValue}) =>{
             )}
           </Field>
         </div>              
-      </div>  
-      <div className={styles.inputGroup}>                
+      </motion.div>  
+      <motion.div className={styles.inputGroup} variants={fadeUp}>                
         <div className={styles.half}>
           <label htmlFor='zipcode'>ZIP Code</label>
           <Field type='number' name='zipcode'>
@@ -196,9 +218,9 @@ export const FormComponent = ({setFieldValue}) =>{
             )}
           </Field>
         </div>
-      </div>    
-      <span className='subtitle orange'>payment details</span>  
-      <div className={styles.inputGroup}>                
+      </motion.div>    
+      <motion.span className='subtitle orange' variants={fadeUp}>payment details</motion.span>  
+      <motion.div className={styles.inputGroup} variants={fadeUp}>                
         <div className={styles.half}>
           <label>Payment Method</label>
         </div>
@@ -225,40 +247,42 @@ export const FormComponent = ({setFieldValue}) =>{
             <label htmlFor="cash-on-delivery">Cash on Delivery</label>
           </div>    
         </div>
-      </div> 
-      {
-        (formData.selectedOption === 'e-money') ? 
+      </motion.div> 
+      <AnimatePresence mode='wait' initial={false}>
+        {
+          (formData.selectedOption === 'e-money') ? 
 
-          <div className={styles.inputGroup}>
-            <div className={styles.half}>
-              <label htmlFor='emoneynumber'>e-money Number</label>
-              <Field type='text' name='emoneynumber'>
-                {({
-                  field, 
-                  meta,
-                }) => (
-                  <CustomInput field={field} meta={meta} placeholder='238521993'/>
-                )}
-              </Field>
-            </div>
-            <div className={styles.half}>
-              <label htmlFor='emoneypin'>e-money Pin</label>
-              <Field type='text' name='emoneypin'>
-                {({
-                  field, 
-                  meta,
-                }) => (
-                  <CustomInput field={field} meta={meta} placeholder='6891'/>
-                )}
-              </Field>
-            </div>
-          </div>
-          :
-          <div className={styles.cashOnInfo}>
-            <div><img src={cashOnIcon} alt='cash on delivery icon'></img></div>
-            <p>{'The ‘Cash on Delivery’ option enables you to pay in cash when our delivery courier arrives at your residence. Just make sure your address is correct so that your order will not be cancelled.'}</p>
-          </div>
-      }
+            <motion.div key='e-money' className={styles.inputGroup} {...swap}>
+              <div className={styles.half}>
+                <label htmlFor='emoneynumber'>e-money Number</label>
+                <Field type='text' name='emoneynumber'>
+                  {({
+                    field, 
+                    meta,
+                  }) => (
+                    <CustomInput field={field} meta={meta} placeholder='238521993'/>
+                  )}
+                </Field>
+              </div>
+              <div className={styles.half}>
+                <label htmlFor='emoneypin'>e-money Pin</label>
+                <Field type='text' name='emoneypin'>
+                  {({
+                    field, 
+                    meta,
+                  }) => (
+                    <CustomInput field={field} meta={meta} placeholder='6891'/>
+                  )}
+                </Field>
+              </div>
+            </motion.div>
+            :
+            <motion.div key='cash' className={styles.cashOnInfo} {...swap}>
+              <div><img src={cashOnIcon} alt='cash on delivery icon'></img></div>
+              <p>{'The ‘Cash on Delivery’ option enables you to pay in cash when our delivery courier arrives at your residence. Just make sure your address is correct so that your order will not be cancelled.'}</p>
+            </motion.div>
+        }
+      </AnimatePresence>
 
     </Form>
   );
@@ -277,14 +301,16 @@ const Checkout = () =>{
   return(
     <section className={styles.checkout}>
       <div className='container'>
-        <span onClick={()=>navigate(-1)}>Go Back</span>
-        <FadeInElement>
+        <span className={styles.goBack} onClick={()=>navigate(-1)}>
+          <span className={styles.arrow}>&larr;</span>Go Back
+        </span>
+        <Reveal stagger={0.15} amount={0.05}>
           <CheckoutFormContainer/>
-          <Card className={styles.summary}>
+          <Card className={styles.summary} variants={fadeUp}>
             <h6>Summary</h6>
             <OrderList items={cartCtx.items} isModal={false} disabledSubmit={!isFormValid} onSubmit={handleSubmit}/>
           </Card>
-        </FadeInElement>
+        </Reveal>
         
       </div>
 

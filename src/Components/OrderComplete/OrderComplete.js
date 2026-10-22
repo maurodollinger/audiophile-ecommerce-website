@@ -6,6 +6,13 @@ import icon from '../../assets/checkout/icon-order-confirmation.svg';
 import CartContext from '../../store/CartContext';
 import { currencyFormatter } from '../../utils/formatting';
 import UserProgressContext from '../../store/UserProgress';
+import { motion } from 'framer-motion';
+import { fadeUp, staggerContainer } from '../Animations/motion';
+
+const checkPop = {
+  hidden: { scale: 0, rotate: -90, opacity: 0 },
+  visible: { scale: 1, rotate: 0, opacity: 1, transition: { type: 'spring', stiffness: 260, damping: 14 } },
+};
 
 const OrderComplete = () =>{
   const {items, grandTotal} = useContext(CartContext);
@@ -27,11 +34,11 @@ const OrderComplete = () =>{
   return(
     items.length >0  && (
       <Modal className={styles.orderComplete} open={progress==='completed'} handleClose={handleClose}>
-        <div>
-          <img src={icon}></img>
-          <h3>THANK YOU FOR YOUR ORDER</h3>
-          <p>You will receive an email confirmation shortly.</p>
-          <div className={styles.orderInfo}>
+        <motion.div variants={staggerContainer(0.08, 0.15)}>
+          <motion.img src={icon} variants={checkPop} alt=''></motion.img>
+          <motion.h3 variants={fadeUp}>THANK YOU FOR YOUR ORDER</motion.h3>
+          <motion.p variants={fadeUp}>You will receive an email confirmation shortly.</motion.p>
+          <motion.div className={styles.orderInfo} variants={fadeUp}>
             <div>
               <div>
                 <img ref={image} src={(items[0].image.mobile)} alt={items[0].name}></img>
@@ -52,9 +59,11 @@ const OrderComplete = () =>{
               <p>GRAND TOTAL</p>
               <p>{currencyFormatter.format(grandTotal)}</p>
             </div>
-          </div>
-          <Button type='one' onClick={handleClose}>BACK TO HOME</Button>
-        </div>
+          </motion.div>
+          <motion.div variants={fadeUp}>
+            <Button type='one' onClick={handleClose}>BACK TO HOME</Button>
+          </motion.div>
+        </motion.div>
       </Modal>
     )
   );

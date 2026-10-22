@@ -3,6 +3,18 @@ import styles from './RelatedProducts.module.scss';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../UI/Button/Button';
+import { motion } from 'framer-motion';
+import { Reveal } from '../../Animations/FadeInElement';
+import { fadeUp, SPRING } from '../../Animations/motion';
+
+const cardVariants = {
+  ...fadeUp,
+  hover: { y: -8, transition: SPRING },
+};
+
+const imageHover = {
+  hover: { scale: 1.06, transition: SPRING },
+};
 
 const RelatedProducts = ({products}) =>{
   const [windowSize, setWindowSize] = useState(window.innerWidth);
@@ -37,20 +49,25 @@ const RelatedProducts = ({products}) =>{
 
   return(
     <section className={styles.relatedProducts}>
-      <h3>You may also like</h3>
-      <div>
+      <Reveal as='h3'>You may also like</Reveal>
+      <Reveal stagger={0.12}>
         {products.map((p,index)=>(
-          
-          <div className={styles.relProductCard}  key={index}>
-            <img src={getImage(p.image)}/>
+          <motion.div
+            className={styles.relProductCard}
+            key={index}
+            variants={cardVariants}
+            whileHover='hover'
+          >
+            <div className={styles.relImage}>
+              <motion.img variants={imageHover} src={`audiophile-ecommerce-website/${getImage(p.image)}`} alt={p.name}/>
+            </div>
             <div>
               <h5>{p.name}</h5>
               <Button onClick={()=>handleClick(p.slug)}>See product</Button>
             </div>              
-          </div>
-         
+          </motion.div>
         ))}
-      </div>
+      </Reveal>
     </section>
   );
 };

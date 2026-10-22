@@ -1,19 +1,21 @@
-import React, { Fragment, useEffect, useMemo, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import styles from './Product.module.scss';
 import products from '../../mockup/products.json';
 import { useNavigate, useParams } from 'react-router-dom';
 import ProductCard from '../Shared/ProductCard/ProductCard';
 import PropTypes from 'prop-types';
 import RelatedProducts from '../Shared/RelatedProducts/RelatedProducts';
-import FadeInElement from '../Animations/FadeInElement';
-import ZoomInElement from '../Animations/ZoomInElement';
+import { motion } from 'framer-motion';
+import { Reveal, RevealItem } from '../Animations/FadeInElement';
+import { clipReveal, EASE_OUT, SPRING, staggerContainer, viewportOnce } from '../Animations/motion';
+import { useImageSize } from '../Animations/useMediaQuery';
 
 export const ProductFeatures = ({ features }) => {
   const featureLines = features.split('\n');
   return (
     <Fragment>
       {featureLines.map((line, index) => (
-        line.trim() !== '' && <p key={index}>{line}</p>
+        line.trim() !== '' && <RevealItem as='p' key={index}>{line}</RevealItem>
       ))}
     </Fragment>
   );
@@ -21,50 +23,50 @@ export const ProductFeatures = ({ features }) => {
 
 const IncludesItemsList = ({ includes }) => {
   return (
-    <ul>
+    <Reveal as='ul' stagger={0.07}>
       {includes.map((item, index) => (
-        <li key={index}>
+        <RevealItem as='li' variant='slideRight' key={index}>
           <span className={styles.quantity}>{item.quantity}x</span> <span className={styles.listItem}>{item.item}</span>
-        </li>
+        </RevealItem>
       ))}
-    </ul>
+    </Reveal>
   );
 };
 
+const tileZoom = {
+  hidden: { scale: 1.15 },
+  visible: { scale: 1, transition: { duration: 1.4, ease: EASE_OUT } },
+};
+
+const GalleryTile = ({ image, className }) => (
+  <motion.div variants={clipReveal} className={`${styles.tile} ${className || ''}`}>
+    <motion.div className={styles.tileLayer} variants={tileZoom}>
+      <motion.div
+        className={styles.tileLayer}
+        style={{ backgroundImage: `url(audiophile-ecommerce-website/${image})` }}
+        whileHover={{ scale: 1.06, transition: SPRING }}
+      />
+    </motion.div>
+  </motion.div>
+);
+
 const Gallery = ({images}) =>{
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
-  const path = '';
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowSize(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  const getImage = useMemo(() => {
-    if (windowSize < 750) {
-      return path + images.first.mobile;
-    } else if (windowSize < 1024) {
-      return path + images.second.tablet;
-    } else {
-      return path + images.third.desktop;
-    }
-  }, [windowSize, images, path]);
+  const size = useImageSize();
 
   return (
-    <div className={styles.productGallery}>
+    <motion.div
+      className={styles.productGallery}
+      initial='hidden'
+      whileInView='visible'
+      viewport={viewportOnce}
+      variants={staggerContainer(0.15)}
+    >
       <div className={styles.productGalleryLeft}>
-        <ZoomInElement style={{ backgroundImage: `url(${getImage})` }}></ZoomInElement>
-        <ZoomInElement style={{ backgroundImage: `url(${getImage})` }}></ZoomInElement>
+        <GalleryTile image={images.first[size]} />
+        <GalleryTile image={images.second[size]} />
       </div>
-      <ZoomInElement className={styles.productGalleryRight} style={{ backgroundImage: `url(${getImage})` }}>
-      </ZoomInElement>
-    </div>
+      <GalleryTile className={styles.productGalleryRight} image={images.third[size]} />
+    </motion.div>
   );
 };
 
@@ -81,7 +83,6 @@ const Product = () =>{
       return;
     }
     setProduct(prod);
-    window.scrollTo(0, 0);
   }, [productName, navigate]);
 
   const handleClick = () =>{
@@ -91,32 +92,26 @@ const Product = () =>{
   return(
     <section className={styles.product}>
       <div className='container'>
-        <span onClick={handleClick}>Go Back</span>
+        <span className={styles.goBack} onClick={handleClick}>
+          <span className={styles.arrow}>&larr;</span>Go Back
+        </span>
         
         {!product ? <div>Loading...</div> :
           (
             <div className={styles.productContainer}>
-              <FadeInElement>
-                <ProductCard product={product} index='0' type='product'/>
-              </FadeInElement>
-              <FadeInElement>
-                <div className={styles.productFeatures}>
-                  <div>
-                    <h3>Features</h3>
-                    <ProductFeatures features={product.features}/>
-                  </div>
-                  <div>
-                    <h3>In the box</h3>
-                    <IncludesItemsList includes={product.includes}/>
-                  </div>
-                </div>
-              </FadeInElement>
-              <FadeInElement>
-                <Gallery images={product.gallery}/>
-              </FadeInElement>
-              <FadeInElement>
-                <RelatedProducts products={product.others}/>
-              </FadeInElement>
+              <ProductCard product={product} index='0' type='product'/>
+              <div className={styles.productFeatures}>
+                <Reveal stagger={0.1}>
+                  <RevealItem as='h3'>Features</RevealItem>
+                  <ProductFeatures features={product.features}/>
+                </Reveal>
+                <Reveal stagger={0.1}>
+                  <RevealItem as='h3'>In the box</RevealItem>
+                  <IncludesItemsList includes={product.includes}/>
+                </Reveal>
+              </div>
+              <Gallery images={product.gallery}/>
+              <RelatedProducts products={product.others}/>
             </div>
           )
         }
@@ -136,6 +131,11 @@ ProductFeatures.propTypes = {
 
 IncludesItemsList.propTypes = {
   includes:PropTypes.array.isRequired
+};
+
+GalleryTile.propTypes = {
+  image:PropTypes.string.isRequired,
+  className:PropTypes.string,
 };
 
 Gallery.propTypes = {

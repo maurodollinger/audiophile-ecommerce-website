@@ -39,9 +39,11 @@
         }
     }
     padding: 3rem;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    inset: 0;
+    margin: auto;
+    height: fit-content;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
     > div{
         h3{
             text-wrap: balance;

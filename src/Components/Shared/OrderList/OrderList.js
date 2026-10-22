@@ -4,6 +4,8 @@ import Counter from '../../UI/Counter/Counter';
 import styles from './OrderList.module.scss';
 import PropTypes from 'prop-types';
 import Button from '../../UI/Button/Button';
+import { AnimatePresence, motion } from 'framer-motion';
+import { DURATION, EASE_OUT } from '../../Animations/motion';
 //import { useLocation } from 'react-router-dom';
 
 /*
@@ -55,20 +57,28 @@ const OrderList = ({ items, isModal = true, onCountChange,  goToCheckout, disabl
   return (
     <>
       <ul className={`${styles.orderList} ${isModal ? styles.fixed : ''}`}>
-        {items.map((item) => (
-          <li key={item.id}>
-            <div className={styles.image}>
-              <img src={item.image.mobile} alt={item.name} />
-            </div>
-            <div className={styles.info}>
-              <p>
-                <b>{item.name}</b>
-              </p>
-              <p>{currencyFormatter.format(item.price)}</p>
-            </div>
-            {isModal ? renderCounter(item) : renderQuantity(item)}
-          </li>
-        ))}
+        <AnimatePresence initial={false}>
+          {items.map((item) => (
+            <motion.li
+              key={item.id}
+              layout
+              initial={{ opacity: 0, x: -24 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 40, height: 0, marginBottom: 0, transition: { duration: DURATION.base / 2, ease: EASE_OUT } }}
+            >
+              <div className={styles.image}>
+                <img src={`audiophile-ecommerce-website/${item.image.mobile}`} alt={item.name} />
+              </div>
+              <div className={styles.info}>
+                <p>
+                  <b>{item.name}</b>
+                </p>
+                <p>{currencyFormatter.format(item.price)}</p>
+              </div>
+              {isModal ? renderCounter(item) : renderQuantity(item)}
+            </motion.li>
+          ))}
+        </AnimatePresence>
       </ul>
 
       <div className={`${styles.payload} ${isModal ? styles.fixed : ''}`}>

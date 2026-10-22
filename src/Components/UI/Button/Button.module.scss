@@ -46,15 +46,20 @@
     svg {
         position: absolute;
         top: 0;
-        left: -75%; 
+        left: 0;
         width: 200%;
         height: 100%;
         opacity: 0;
-        transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        transform: translateX(-37.5%);
+        transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-base) var(--ease-out);
+        pointer-events: none;
       }
     
       &:hover svg {
-        left: 0; 
+        transform: translateX(0);
         opacity: .5;
+      }
+      &.disabled:hover svg{
+        opacity: 0;
       }
 }
