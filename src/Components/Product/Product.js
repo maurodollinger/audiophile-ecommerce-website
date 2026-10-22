@@ -43,7 +43,7 @@ const GalleryTile = ({ image, className }) => (
     <motion.div className={styles.tileLayer} variants={tileZoom}>
       <motion.div
         className={styles.tileLayer}
-        style={{ backgroundImage: `url(audiophile-ecommerce-website/${image})` }}
+        style={{ backgroundImage: `url(${image})` }}
         whileHover={{ scale: 1.06, transition: SPRING }}
       />
     </motion.div>

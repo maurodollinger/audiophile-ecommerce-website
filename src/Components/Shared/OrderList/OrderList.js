@@ -67,7 +67,7 @@ const OrderList = ({ items, isModal = true, onCountChange,  goToCheckout, disabl
               exit={{ opacity: 0, x: 40, height: 0, marginBottom: 0, transition: { duration: DURATION.base / 2, ease: EASE_OUT } }}
             >
               <div className={styles.image}>
-                <img src={`audiophile-ecommerce-website/${item.image.mobile}`} alt={item.name} />
+                <img src={item.image.mobile} alt={item.name} />
               </div>
               <div className={styles.info}>
                 <p>
